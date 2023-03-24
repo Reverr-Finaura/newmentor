@@ -1,0 +1,236 @@
+.loginOuterCont {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(121.43deg, #f2f2f2 0%, #79bfe5 59.09%);
+
+  /* padding: 0rem 3rem; */
+}
+.leftCont {
+  width: 50%;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+.brandLogoCont {
+  display: flex;
+  flex-direction: column;
+  width: 110px;
+  height: 90px;
+  padding: 0rem;
+}
+.brandLogo {
+  width: 100%;
+  height: 100%;
+}
+.brandName {
+  color: #2a72de;
+  font-family: "Poppins";
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+.leftMidCont {
+  width: fit-content;
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+.leftMidContTopText {
+  font-family: "Philosopher";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45.661px;
+  line-height: 51px;
+  letter-spacing: 0.09em;
+  color: #1a114d;
+}
+.leftMidContBottomText {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42.0149px;
+  line-height: 40px;
+  letter-spacing: 0.03em;
+  color: #1a114d;
+}
+.leftBottomCont {
+  width: fit-content;
+  margin-top: 3rem;
+  margin-left: 2rem;
+}
+.leftBottomContTopText,
+.leftBottomContBottomText {
+  font-family: "Exo";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17.6133px;
+  line-height: 169.15%;
+  color: #4a4a4a;
+  letter-spacing: 0.14em;
+  text-transform: capitalize;
+}
+
+.rightCont {
+  width: 50%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f4f4f4;
+  box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.25),
+    0px 4px 24px -1px rgba(0, 0, 0, 0.25);
+  border-radius: 40px 0px 0px 40px;
+}
+
+.rightContHeading {
+  font-family: "Exo";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 33px;
+  /* or 116% */
+  letter-spacing: 0.175em;
+  color: #000000;
+  margin: 0;
+  margin-top: 2rem;
+}
+
+.googleBtn {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  margin-top: 2rem;
+  background: #f0f0f0;
+  border: 0.704545px solid rgba(0, 0, 0, 0.15);
+  border-radius: 7.04545px;
+  padding: 0.5rem 1rem;
+  font-family: "Exo";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 14px;
+  color: #898989;
+}
+.gIconCont {
+  margin: auto;
+  margin-right: 0.5rem;
+  width: 25px;
+  height: 25px;
+}
+.gICon {
+  width: 100%;
+  height: 100%;
+}
+
+.orText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 12px;
+  color: rgba(0, 0, 0, 0.37);
+  font-family: "Exo";
+  margin-top: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  width: 55%;
+  margin-bottom: 2rem;
+}
+
+.form > label {
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  /* border: none; */
+  padding: 1rem;
+  font-family: "Exo";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  /* line-height: 12px; */
+  outline: none;
+  letter-spacing: 0.05em;
+  color: #898989;
+  margin-bottom: 1rem;
+  background: #efefef;
+  border: 0.895833px solid #d1d1d1;
+  border-radius: 8.95833px;
+}
+
+.Button {
+  background: #455a64;
+  cursor: pointer;
+  border: 0.709201px solid rgba(0, 0, 0, 0.15);
+  border-radius: 7.09201px;
+  font-family: "Exo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 12px;
+  letter-spacing: 0.09em;
+  color: #ffffff;
+  padding: 1rem;
+  width: 80%;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.randomtext {
+  font-family: "Exo";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  /* line-height: 12px; */
+  letter-spacing: 0.05em;
+  margin: 0;
+  color: #898989;
+  margin-bottom: 1rem;
+}
+.linkk {
+  color: #2a72de;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .loginOuterCont {
+    flex-direction: column;
+    padding-left: 0.25rem;
+  }
+
+  .leftCont,
+  .rightCont {
+    width: 95%;
+    margin: auto;
+    text-align: center;
+  }
+  .rightCont {
+    border-radius: 6px;
+    margin-top: 3rem;
+  }
+  .brandLogoCont {
+    margin-bottom: 4rem;
+  }
+  .leftBottomCont,
+  .leftMidCont {
+    margin: auto;
+    margin-top: 2rem;
+  }
+}
