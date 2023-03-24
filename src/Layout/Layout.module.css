@@ -1,0 +1,10 @@
+.main__container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+}
+
+.main__content {
+  display: flex;
+  margin-top: 102px;
+}
