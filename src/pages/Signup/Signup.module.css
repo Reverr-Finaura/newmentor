@@ -37,7 +37,7 @@
 }
 .leftMidCont {
   width: fit-content;
-  margin-top: 2rem;
+  margin-top: 7rem;
   margin-left: 2rem;
 }
 .leftMidContTopText {
@@ -54,7 +54,7 @@
   font-style: normal;
   font-weight: 600;
   font-size: 42.0149px;
-  line-height: 40px;
+  line-height: 51px;
   letter-spacing: 0.03em;
   color: #1a114d;
 }
@@ -68,7 +68,7 @@
   font-family: "Exo";
   font-style: normal;
   font-weight: 600;
-  font-size: 17.6133px;
+  font-size: 19.6133px;
   line-height: 169.15%;
   color: #4a4a4a;
   letter-spacing: 0.14em;

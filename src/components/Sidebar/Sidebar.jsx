@@ -26,11 +26,11 @@ const Sidebar = () => {
         className={({ isActive }) =>
           isActive ? "sidebar_link active" : "sidebar_link"
         }
-        to="/knowledge"
+        to="/messages"
       >
         <div className="sidebar-final-icon-name-cont">
           <img className="sidebar-final-icon" src={knowL} alt="icon" />
-          <p className="sidebar-final-icon-name">Knowledge</p>
+          <p className="sidebar-final-icon-name">Messages</p>
         </div>
       </NavLink>
       {/* href="https://reverrapp.com/fundingform" target="_blank" */}
@@ -38,7 +38,7 @@ const Sidebar = () => {
         className={({ isActive }) =>
           isActive ? "sidebar_link active" : "sidebar_link"
         }
-        to="/funding-page"
+        to="/transactions"
       >
         <div className="sidebar-final-icon-name-cont">
           <img
@@ -46,14 +46,14 @@ const Sidebar = () => {
             src={fundL}
             alt="icon"
           />
-          <p className="sidebar-final-icon-name">Funding</p>
+          <p className="sidebar-final-icon-name">Transaction</p>
         </div>
       </NavLink>
       <NavLink
         className={({ isActive }) =>
           isActive ? "sidebar_link active" : "sidebar_link"
         }
-        to="/mentors"
+        to="/calender"
       >
         <div className="sidebar-final-icon-name-cont">
           <img
@@ -61,7 +61,7 @@ const Sidebar = () => {
             src={mentL}
             alt="icon"
           />
-          <p className="sidebar-final-icon-name">Mentorship</p>
+          <p className="sidebar-final-icon-name">Calender</p>
         </div>
       </NavLink>
       <NavLink

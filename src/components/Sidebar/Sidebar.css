@@ -4,7 +4,7 @@
   width: 200px;
   height: 100vh;
   display: flex;
-  /* position: fixed; */
+  position: fixed;
   top: 103px;
   left: 0;
   flex-direction: column;
@@ -102,6 +102,7 @@
 
 .sidebar_link {
   text-decoration: none;
+  padding: 1rem 0;
 }
 
 @media (max-width: 701px) {

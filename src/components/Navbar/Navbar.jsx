@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiFillBell, AiFillSetting } from "react-icons/ai";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { FaCalendarAlt } from "react-icons/fa";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -127,11 +128,13 @@ const Navbar = () => {
             })}
           </div> */}
         </div>
-
+        <div>
+          <FaCalendarAlt />
+        </div>
         <img
           onClick={() => navigate("/userprofile")}
           className="navbar_final_user_Image"
-          src=""
+          src="./images/user-round-img.png"
           alt="userimg"
         />
         {/* <div className="navbar-topp-social-icon">

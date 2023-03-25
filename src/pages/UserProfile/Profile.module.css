@@ -1,0 +1,120 @@
+.profile_main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.profile_main > h1 {
+  font-family: Manrope;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 75px;
+  letter-spacing: 0.1em;
+  /* margin-bottom: 1rem; */
+  text-transform: uppercase;
+  /* text-align: center; */
+}
+
+.user_img {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  box-shadow: 2px 4px 14px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 13px;
+  width: 121px;
+  margin-bottom: 2rem;
+  height: 121px;
+}
+
+.user_img > img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.img_upload_label {
+  position: absolute;
+  right: -12px;
+  top: -14px;
+  cursor: pointer;
+}
+
+.profile_edit_btn,
+.save_btn {
+  background: #2a72de;
+  border-radius: 14.6429px;
+  color: #fff;
+  font-family: Quicksand;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  padding: 8px 17px;
+  outline: none;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.form_container {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  margin: 1rem auto;
+}
+
+.input_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input_flex_div {
+  display: flex;
+  gap: 4rem;
+  margin-bottom: 1rem;
+}
+
+.input_field_label {
+  font-family: Quicksand;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: 0.035em;
+  text-align: left;
+  color: #717171;
+}
+
+.input_field {
+  background: #efefef;
+  border: 0.895833px solid #e4e4e4;
+  font-family: Manrope;
+  font-size: 13px;
+  font-weight: 800;
+  width: 300px;
+  min-width: 100%;
+  /* line-height: 45px; */
+  letter-spacing: 0.085em;
+  outline: none;
+  /* text-align: left; */
+  resize: none;
+
+  padding: 10px;
+  border-radius: 8.95833px;
+}
+
+.save_btn {
+  align-self: end;
+  padding: 8px 20px;
+  margin-top: 1rem;
+  /* margin-left: -10rem; */
+}
+
+.save_btn:disabled {
+  background-color: #3c81e7c4;
+  cursor: not-allowed;
+}

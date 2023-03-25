@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { Dashboard, Login, Signup } from "./pages";
+import { Dashboard, Login, Profile, Signup } from "./pages";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/my-profile" element={<Profile />} />
     </Routes>
   );
 }
