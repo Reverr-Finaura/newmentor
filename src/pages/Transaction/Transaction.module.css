@@ -1,0 +1,119 @@
+.transaction_main {
+  box-shadow: 0px 4px 24px 2px #0000001a;
+  border-radius: 32px;
+  min-height: 100vh;
+  min-width: 900px;
+  border: 2px solid #e6e6e6;
+  margin: 2rem 2rem 2rem 6rem;
+  /* margin-left: 5rem; */
+}
+
+.transaction_main > h1 {
+  padding: 1.6rem;
+  font-weight: 600;
+  font-size: 21.9333px;
+  line-height: 15px;
+  /* identical to box height, or 70% */
+
+  color: #000000;
+}
+
+.transaction_main > hr {
+  border: 0.953623px solid #eeeeee;
+  /* margin-top: 1rem; */
+}
+
+.transaction_main > p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.045em;
+
+  color: #8c8c8c;
+  padding: 1rem 1.6rem;
+}
+
+.transaction_search_bar {
+  display: flex;
+  /* justify-content: space-between; */
+  margin: 1rem auto;
+  align-items: center;
+  /* height: 35px; */
+  padding: 0.6rem 1rem;
+  width: 60%;
+  background: #eeeeee;
+  box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.1);
+  border-radius: 11.4435px;
+}
+
+.search_icon {
+  font-size: 23px;
+  color: #8e8e8e;
+  cursor: pointer;
+}
+
+.transaction_search_bar > input {
+  border: none;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+
+  color: rgba(0, 0, 0, 0.45);
+
+  background: transparent;
+  outline: none;
+  margin-left: 0.5rem;
+}
+
+.transaction_history {
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem 1.6rem;
+}
+
+.transaction_headings > h3 {
+  font-weight: 600;
+  font-size: 21.9333px;
+  line-height: 35px;
+  color: #000000;
+}
+
+.transaction_headings > p {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+
+  letter-spacing: 0.045em;
+
+  color: #8c8c8c;
+}
+
+.download_button {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.045em;
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #1963ea;
+}
+
+.download_button > span {
+  margin-left: 0.7rem;
+}
+
+.transaction_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table_container {
+  margin: 2rem 0 0 0;
+}

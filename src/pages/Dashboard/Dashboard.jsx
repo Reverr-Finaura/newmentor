@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../Layout/Layout";
 import { FiArrowUpRight } from "react-icons/fi";
 import BlogCard from "../../components/Blog Card/BlogCard";
+import Table from "../../components/Transactiontable/Table";
 
 import "./Dashboard.css";
 
@@ -59,9 +60,20 @@ const Dashboard = () => {
             </section>
             {/* Transaction CONTAINER */}
 
-            <section className="meeting-container">
-              {/* <DashboardToolsCont /> */}
-              <h1>Transaction</h1>
+            <section className="transaction-container">
+              <div className="transaction_top">
+                <div className="top_headings">
+                  <h1>Transaction</h1>
+                  <p>Check your payment information according to your needs.</p>
+                </div>
+                <button className="view_more_btn">
+                  <span>Load more</span>
+                  <FiArrowUpRight />
+                </button>
+              </div>
+              <div className="transaction_table">
+                <Table />
+              </div>
             </section>
 
             {/* JOIN OUR COMUNITY CONTAINER */}
@@ -101,7 +113,7 @@ const Dashboard = () => {
                     window.open("https://reverr.io/blog", "_blank")
                   }
                 >
-                  <span>View more</span>
+                  <span>Explore more</span>
                   <FiArrowUpRight />
                 </button>
               </div>
