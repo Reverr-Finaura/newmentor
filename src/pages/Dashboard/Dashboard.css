@@ -257,8 +257,10 @@ border-image-slice: 1; */
 /* CHAT CONTAINER */
 .dashboard_chat-containerr {
   position: relative;
-  width: 410px;
-  padding: 12px 33px;
+  width: 445px;
+  height: 500px;
+  margin-left: 1rem;
+  padding: 12px 0px;
   /* margin: 1rem 0; */
   margin-bottom: 1.5rem;
   border-radius: 20px;
@@ -268,6 +270,10 @@ border-image-slice: 1; */
   box-shadow: 0px 2.4417px 14.6502px -0.610425px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(6.10425px);
   z-index: 10;
+  overflow-y: auto;
+}
+.dashboard_chat-containerr::-webkit-scrollbar {
+  display: none;
 }
 
 /* BLOG CONTAINER */

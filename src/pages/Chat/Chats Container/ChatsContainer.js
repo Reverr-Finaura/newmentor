@@ -1,12 +1,24 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
 import ChatSkeleton from '../../../components/Skeleton/Chat Skeleton/ChatSkeleton'
 import styles from "./ChatContainer.module.css"
 
 const ChatsContainer = () => {
+  const[dummyLoading,setDummyLoadig]=useState(true)
+
+  useEffect(()=>{
+setTimeout(()=>{
+setDummyLoadig(false)
+},1500)
+  },[])
+
   return (
    <section className={styles.outerCont}>
-<ChatSkeleton cards={3}/>
-{[1,2,3,4,5].map((chat,idx)=>{
+{dummyLoading&&<ChatSkeleton cards={3}/>}
+
+{!dummyLoading&&
+[1,2,3,4,5].map((chat,idx)=>{
     return <>
 
     <div key={idx} className={styles.chatCont}>
@@ -20,8 +32,8 @@ const ChatsContainer = () => {
     </div>
 
     </>
-})}
-
+})
+}
    </section>
   )
 }
