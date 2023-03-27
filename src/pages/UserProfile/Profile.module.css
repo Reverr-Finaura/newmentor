@@ -118,3 +118,9 @@
   background-color: #3c81e7c4;
   cursor: not-allowed;
 }
+
+@media (max-width: 1100px) {
+  .input_flex_div {
+    display: block;
+  }
+}

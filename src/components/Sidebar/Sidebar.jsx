@@ -6,10 +6,22 @@ import knowL from "../../icons/know-light.png";
 import mentL from "../../icons/cil_education.png";
 import comL from "../../icons/Vector (1).png";
 import fundL from "../../icons/funding-light.png";
+import { useSelector } from "react-redux";
+import { selectPhnSidebar } from "../../features/phnSidebarSlice";
+import "animate.css";
 
 const Sidebar = () => {
+  const phnSidebar = useSelector(selectPhnSidebar);
+  console.log(phnSidebar);
   return (
-    <section id="sidebar-final">
+    <section
+      id="sidebar-final"
+      className="animate__animated 
+      animate__slideInLeft  animate__fast"
+      style={{
+        display: !phnSidebar && window.innerWidth < 800 ? "none" : "flex",
+      }}
+    >
       {/* <img className='sidebar-final-brand-logo' src="./images/Frame 6266720.png" alt="brand-logo" /> */}
       <NavLink
         className={({ isActive }) =>
