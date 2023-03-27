@@ -253,6 +253,22 @@ border-image-slice: 1; */
   display: flex;
 }
 
+/* CHAT CONTAINER */
+.dashboard_chat-containerr {
+  position: relative;
+  width: 410px;
+  padding: 12px 33px;
+  /* margin: 1rem 0; */
+  margin-bottom: 1.5rem;
+  border-radius: 20px;
+  /* width: 100%; */
+  border: 1px solid var(--card-border);
+  background: var(--bg-card);
+  box-shadow: 0px 2.4417px 14.6502px -0.610425px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(6.10425px);
+  z-index: 10;
+}
+
 /* BLOG CONTAINER */
 #dashborad_blog-containerr_outerCont {
   width: 80%;

@@ -1,0 +1,47 @@
+.outerCont{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom-right-radius: 32px;
+    height: 45px;
+    border-top:1.6px solid #EEEEEE;
+}
+.attachmentIcon{
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.textInp{
+    margin-left: 1rem;
+    background: #FAFAFA;
+border-radius: 12px;
+width: 70%;
+padding: 1rem;
+border: 1.6px solid #EEEEEE;
+font-style: normal;
+font-weight: 500;
+font-size: 1rem;
+line-height: 16px;
+color: black;
+
+}
+.textInp::placeholder{
+    color: rgba(0, 0, 0, 0.45);  
+}
+.textInp:focus{
+    outline: none;
+}
+
+.sendMessageBtn{
+    padding: 1rem;
+    border: none;
+    color: #27AE60;
+    font-style: normal;
+font-weight: 500;
+font-size: 1rem;
+line-height: 16px;
+cursor: pointer;
+width: 200px;
+border-radius: 12px;
+background-color: transparent;
+}

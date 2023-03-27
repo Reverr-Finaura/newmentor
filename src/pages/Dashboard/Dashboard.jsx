@@ -5,6 +5,7 @@ import BlogCard from "../../components/Blog Card/BlogCard";
 import Table from "../../components/Transactiontable/Table";
 
 import "./Dashboard.css";
+import MessagesCont from "../Chat/Messages/MessagesCont";
 
 const Dashboard = () => {
   const [hasMeeting, setHasMeeting] = useState(false);
@@ -99,30 +100,10 @@ const Dashboard = () => {
             </section>
           </div>
           <div className="dashboard-data-right-cont">
-            <section className="blog-containerr">
-              <div className="blog-containerr_Top">
-                <h4
-                  style={{ marginBottom: "1rem" }}
-                  className="course-container-heading"
-                >
-                  Blogs
-                </h4>
-                <button
-                  className="view_more_btn"
-                  onClick={() =>
-                    window.open("https://reverr.io/blog", "_blank")
-                  }
-                >
-                  <span>Explore more</span>
-                  <FiArrowUpRight />
-                </button>
-              </div>
-              <BlogCard item={item} key={item.id} />
-              <BlogCard item={item} key={item.id} />
-              <BlogCard item={item} key={item.id} />
-              {/* {blogArray.slice(0, 3).map((item, index) => {
-                return <BlogCard item={item} key={index} />;
-              })} */}
+
+          {/* MESSAGES CONTAINER */}
+            <section className="dashboard_chat-containerr">
+            <MessagesCont/>
             </section>
             <section className="blog-containerr">
               <div className="blog-containerr_Top">
