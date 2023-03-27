@@ -117,3 +117,41 @@
 .table_container {
   margin: 2rem 0 0 0;
 }
+
+@media (max-width: 1225px) {
+  .transaction_main {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 1030px) {
+  .transaction_main {
+    min-width: 500px;
+  }
+}
+
+@media (max-width: 820px) {
+  .transaction_main {
+    min-width: 470px;
+  }
+}
+
+@media (max-width: 800px) {
+  .transaction_main {
+    margin: 2rem;
+  }
+  .transaction_main {
+    text-align: center;
+  }
+  .transaction_top {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .transaction_main {
+    margin: 1rem;
+    min-width: 50%;
+  }
+}

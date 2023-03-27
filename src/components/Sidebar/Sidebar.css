@@ -1,5 +1,5 @@
 #sidebar-final {
-  /* background: var(--bg-clr); */
+  background: #fff;
   /* width: 156px; */
   width: 200px;
   height: 100vh;
@@ -108,5 +108,14 @@
 @media (max-width: 701px) {
   #sidebar-final {
     padding: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #sidebar-final {
+    top: 0px;
+    z-index: 99;
+    padding-top: 100px;
+    height: 100%;
   }
 }

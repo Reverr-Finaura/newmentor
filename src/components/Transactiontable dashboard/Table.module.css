@@ -1,12 +1,14 @@
 .main_table {
   width: 100%;
-  min-width: 200px;
+  table-layout: fixed;
+  /* max-width: 100px;
+  margin: 0;
+  min-width: 200px; */
   border: 2px solid #e2e2e2;
   text-align: left;
   vertical-align: middle;
   border-collapse: separate;
   border-spacing: 0;
-  table-layout: fixed;
   border-radius: 24px;
 }
 
@@ -20,9 +22,11 @@
 
 .main_table th {
   background-color: #ececec;
-  padding: 16px 30px;
+  padding: 7px;
   font-weight: 600;
-  font-size: 12px;
+  /* text-align: center; */
+  font-size: 10px;
+  /* width: 1px !important; */
   line-height: 14px;
   letter-spacing: 0.045em;
   vertical-align: middle;
@@ -31,14 +35,14 @@
 }
 
 .main_table th span {
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
 .main_table td {
-  padding: 10px 30px;
+  padding: 10px;
   font-weight: 600;
   border-bottom: 0.953623px solid #eeeeee;
-  font-size: 14px;
+  font-size: 9px;
   line-height: 17px;
   letter-spacing: 0.045em;
   color: #454545;
@@ -46,17 +50,17 @@
 
 .main_table > tbody > tr {
   border: 0.953623px solid #eeeeee;
-  padding: 10px;
+  padding: 5px;
   margin-left: 90px;
 }
 
 .main_table td span {
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
 .download_button {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 11px;
   line-height: 17px;
   display: flex;
   align-items: center;
@@ -66,44 +70,4 @@
   background: transparent;
   cursor: pointer;
   color: #1963ea !important;
-}
-
-@media (max-width: 1225px) {
-  .download_button,
-  .main_table td {
-    font-size: 10px !important;
-  }
-  .main_table th {
-    padding: 7px;
-  }
-}
-
-@media (max-width: 1135px) {
-  .main_table th span,
-  .main_table td span,
-  .main_table td {
-    padding: 6px 9px;
-  }
-
-  .main_table th span,
-  .main_table td span {
-    margin: 0 3px;
-  }
-}
-
-@media (max-width: 550px) {
-  .download_button,
-  .main_table td {
-    font-size: 8px !important;
-  }
-  .main_table th {
-    font-size: 9px !important;
-  }
-  .main_table th {
-    margin: 6px;
-  }
-  .main_table th span,
-  .main_table td span {
-    margin: 0px -6px;
-  }
 }

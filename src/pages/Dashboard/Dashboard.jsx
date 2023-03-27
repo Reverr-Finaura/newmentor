@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Layout from "../../Layout/Layout";
 import { FiArrowUpRight } from "react-icons/fi";
 import BlogCard from "../../components/Blog Card/BlogCard";
-import Table from "../../components/Transactiontable/Table";
-
 import "./Dashboard.css";
 import MessagesCont from "../Chat/Messages/MessagesCont";
+import Table from "../../components/Transactiontable dashboard/Table";
+
 
 const Dashboard = () => {
   const [hasMeeting, setHasMeeting] = useState(false);
@@ -24,7 +24,7 @@ const Dashboard = () => {
         {/* USER INFO CONTAINER */}
         <div className="user-container">
           <div>
-            <h1 className="greeting">
+            <h1 className="greeting ">
               Welcome{" "}
               <span>
                 <h4 className="userName">{"User"}</h4>

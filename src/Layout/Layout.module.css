@@ -13,3 +13,10 @@
   width: calc(100% - 200px);
   margin-left: 200px;
 }
+
+@media screen and (max-width: 800px) {
+  .main__block {
+    margin-left: 0;
+    width: 100%;
+  }
+}
