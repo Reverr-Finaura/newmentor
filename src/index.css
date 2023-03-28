@@ -17,3 +17,87 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
+textarea{
+  background: #f6f6f6;
+  border: 2px solid #2a72de;
+  border-radius: 8px;
+  font-family: Poppins;
+  font-size: 24px;
+  height: 30vh;
+  margin: 1rem auto;
+  outline: none;
+  padding: 0.4rem 1rem;
+  resize: none;
+  width: 95%;
+}
+
+.dark-theme {
+  --navbar-clr: linear-gradient(
+    157.59deg,
+    #2f2f2f 0%,
+    #2f2f2f 13.08%,
+    #373737 24.6%,
+    #3e3e3e 42.39%,
+    #4e4e4e 56%,
+    #525252 70.13%,
+    #5d5d5d 82.69%,
+    #656565 91.17%,
+    #737373 100.49%
+  );
+  --sidebar-hover: #494949;
+  --main-text: white;
+  --sub-text: #ffffffe6;
+  --bg-clr: #373737;
+  --bg-card: #3e3e3e;
+  --card-border: #888080;
+  --bg-small-card: #555555;
+  --comment-card-div: rgb(40, 39, 39);
+  --knowledge-card: rgb(40, 39, 39);
+  --bg-dashboard-card: rgb(75, 71, 71);
+  --bg-sub-card: #4b4747;
+  --box-shadow: white;
+  --comment-card: #787878;
+  --comment-card-placeHolder: white;
+  --change-theme: white;
+  --profile-input: rgb(40, 39, 39);
+  --user-profile-indicator: white;
+  --user-profile-sub-indicator: rgba(255, 255, 255, 0.703);
+  --navbar-scroll-bg: rgba(0, 0, 0, 0.8);
+  --btnNewColorTheme: white;
+  --dashbaord-btn-text: #ffffff;
+}
+.light-theme {
+  --navbar-clr: linear-gradient(
+    157.59deg,
+    #ffffff 0%,
+    #d9e4f4 37.68%,
+    #c7daf5 43.96%,
+    #d0e0f8 55.48%,
+    #dde9fc 64.37%,
+    #e3eefd 75.37%,
+    #e9f2ff 100.49%
+  );
+  --sidebar-hover: #ebf0fe;
+  --bg-small-card: #fafcff;
+  --main-text: #202020;
+  --sub-text: rgb(32, 32, 32, 0.75);
+  --bg-clr: #fbfbfb;
+
+
+  --knowledge-card: #f6f6f6;
+  --card-border: #efefef;
+  --bg-card: #fafcff;
+  --comment-card-div: rgba(217, 217, 217, 0.9);
+  --bg-dashboard-card: #fafaff;
+  --bg-sub-card: #fafaff;
+  --box-shadow: rgb(0 0 0 / 25%);
+  --comment-card: white;
+  --comment-card-placeHolder: black;
+  --change-theme: black;
+  --profile-input: #f6f6f6;
+  --user-profile-indicator: #2a72de;
+  --user-profile-sub-indicator: rgba(42, 114, 222, 0.5);
+  --navbar-scroll-bg: rgba(255, 255, 255, 0.8);
+  --btnNewColorTheme: #2a72de;
+  --dashbaord-btn-text: #2a72de;
+}

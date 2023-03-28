@@ -10,7 +10,7 @@ const ChatSkeleton = ({ cards }) => {
       return (
         <>
           <SkeletonTheme baseColor="#e6e4e4dc" highlightColor="grey">
-          <div className={styles.outerCont}>
+          <div key={index} className={styles.outerCont}>
           <Skeleton circle width={50} height={50}/>
 
             <div className={styles.userCont}>
@@ -32,58 +32,6 @@ const ChatSkeleton = ({ cards }) => {
                   />
             </div>
           </div>
-            {/* <div className={styles.card} key={index}>
-              <div className={styles.cardTop}>
-              <Skeleton circle width={100} height={100}/>
-                <Skeleton
-                  className={styles.cardTopUserImage}
-                  width={355}
-                  height={200}
-                />
-              </div>
-              <div className={styles.cardBottomTop}>
-                <Skeleton
-                  count={1}
-                  style={{ marginBottom: "1rem", width: "40%" }}
-                />
-              </div>
-              <div className={styles.tagCont}>
-                <div className={styles.tag}>
-                  <Skeleton
-                    count={1}
-                    style={{ width: "100%", height: "10px" }}
-                  />
-                </div>
-                <div className={styles.tag}>
-                  <Skeleton
-                    count={1}
-                    style={{ width: "100%", height: "10px" }}
-                  />
-                </div>
-                <div className={styles.tag}>
-                  <Skeleton
-                    count={1}
-                    style={{ width: "100%", height: "10px" }}
-                  />
-                </div>
-              </div>
-              <div className={styles.cardBottom}>
-                <div className={styles.cardPrice}>
-                  {" "}
-                  <Skeleton
-                    count={1}
-                    style={{ width: "60%", height: "40px", marginLeft: "2rem" }}
-                  />
-                </div>
-                <div className={styles.cardButton}>
-                  {" "}
-                  <Skeleton
-                    count={1}
-                    style={{ width: "60%", height: "40px", marginLeft: "2rem" }}
-                  />
-                </div>
-              </div>
-            </div> */}
           </SkeletonTheme>
         </>
       );

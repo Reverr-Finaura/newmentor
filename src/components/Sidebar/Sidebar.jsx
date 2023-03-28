@@ -12,7 +12,7 @@ import "animate.css";
 
 const Sidebar = () => {
   const phnSidebar = useSelector(selectPhnSidebar);
-  console.log(phnSidebar);
+  // console.log(phnSidebar);
   return (
     <section
       id="sidebar-final"

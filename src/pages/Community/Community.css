@@ -31,7 +31,7 @@
   font-weight: 400;
   font-size: 14px;
   margin-bottom: 1rem;
-  color: var(--main-text);
+  color: black;
 }
 .UploadPostOuterBoxContainerNotExpanded {
   border: none;
@@ -59,7 +59,7 @@
   font-family: 'Quicksand';
 font-style: normal;
   font-size: 2rem;
-  color: var(--main-text);
+  color: black;
   margin-bottom: 1.5rem;
 }
 .postUploaddSquareCont {
@@ -108,7 +108,7 @@ font-style: normal;
     rgba(255, 255, 255, 0.35) 4.68%,
     rgba(255, 255, 255, 0.3) 91.73%
   ); */
-  color: var(--main-text);
+  color: black;
   border-radius: 9px;
   /* box-shadow: 0px 2.05973px 12.3584px -0.514933px rgba(0, 0, 0, 0.15); */
   /* backdrop-filter: blur(5.14933px); */
@@ -321,18 +321,18 @@ font-style: normal;
   height: 32px;
   width: 90%;
   /* padding-left: 3rem; */
-  /* color: var(--main-text); */
+  /* color: black; */
   font-size: 20px;
-  /* border-color: var(--main-text); */
+  /* border-color: black; */
   border-color: #9C9C9C;
   background-color: var(--bg-clr);
 }
 
 #postTextContainer::placeholder {
-  color: var(--main-text);
+  color: black;
 }
 #postTextContainerExpanded::placeholder {
-  color: var(--main-text);
+  color: black;
 }
 #postTextContainerExpanded {
   height: fit-content;
@@ -348,7 +348,7 @@ font-style: normal;
   border: none;
 
   background-color: var(--bg-clr);
-  color: var(--main-text);
+  color: black;
 }
 .editPostTextarea {
   font-family: "Poppins";
@@ -370,11 +370,11 @@ font-style: normal;
   left: 1rem;
   top: 33%;
   cursor: pointer;
-  color: var(--comment-card-placeHolder);
-  stroke: var(--comment-card-placeHolder);
+  color: black;
+  stroke: black;
 }
 .expandTextAreaIcon > path {
-  stroke: var(--comment-card-placeHolder);
+  stroke: black;
 }
 
 .expandTextAreaIconExpanded {
@@ -406,7 +406,7 @@ font-style: normal;
 .addImageInCommunityReactIcon {
   font-size: 1.9rem;
   cursor: pointer;
-  color: var(--main-text);
+  color: black;
 }
 .uploadPostIconButton {
   margin-left: auto;
@@ -481,7 +481,7 @@ font-style: normal;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
-  color: var(--main-text);
+  color: black;
 }
 .EdituploadPostContainerrrr {
   display: flex;
@@ -546,7 +546,7 @@ edit_Delete_Btn {
   color: red;
 }
 .edit_Btn {
-  color: var(--main-text);
+  color: black;
 }
 .editImageOverLayContainerImageContainer {
   position: relative;
@@ -563,7 +563,7 @@ edit_Delete_Btn {
   position: absolute;
 }
 .navbarUploadPostOuterBoxContainer {
-  /* border: 2px solid var(--main-text); */
+  /* border: 2px solid black; */
   border: 1px solid rgb(42, 114, 222);
 
   border-radius: 8px;
@@ -626,8 +626,8 @@ body::-webkit-scrollbar {
   width: 80%;
   margin: auto;
   border-radius: 16px;
-  border: 1px solid var(--btnNewColorTheme);
-color: var(--btnNewColorTheme);
+  border: 1px solid #2a72de;
+color: #2a72de;
 background-color:  var(--bg-clr);
 padding-top: .5rem;
 padding-bottom: .5rem;
@@ -645,7 +645,7 @@ cursor: pointer;
   font-size: 1.4rem;
   line-height: 42px;
   margin-bottom: 1.5rem;
-  color: var(--main-text);
+  color: black;
 }
 .communityNewsSectionNewsCont {
   display: flex;
@@ -673,7 +673,7 @@ cursor: pointer;
   font-weight: 600;
   font-size: 13px;
   line-height: 21px;
-  color: var(--main-text);
+  color: black;
   padding: 0.5rem;
 }
 
@@ -720,7 +720,7 @@ cursor: pointer;
   font-weight: 600;
   font-size: 13px;
   line-height: 21px;
-  color: var(--main-text);
+  color: black;
   padding: 0.5rem;
 }
 @media (max-width: 1420px) {

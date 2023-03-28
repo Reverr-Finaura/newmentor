@@ -3,6 +3,9 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { Dashboard, Login, Profile, Signup, Transaction } from "./pages";
 import Chat from "./pages/Chat/Chat";
+import Community from "./pages/Community/Community";
+import SharedCommunityPost from "./pages/Shared Community Post/SharedCommunityPost"
+
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
       <Route path="/my-profile" element={<Profile />} />
       <Route path="/messages" element={<Chat/>}/>
       <Route path="/transactions" element={<Transaction />} />
+      <Route path="/community" element={<Community/>}>
+      <Route path=":postId" element={<SharedCommunityPost />}></Route>
+      </Route>
     </Routes>
   );
 }

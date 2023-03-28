@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./CommunityFinal.css";
-import KnowledgeNavbar from "../../components/KnowledgeNavbar/KnowledgeNavbar";
-import CommunityNavbar from "../../components/Community Navbar/CommunityNavbar";
-import SidebarFinal from "../../components/Sidebar Final/SidebarFinal";
-import PhnSidebar from "../../components/PhnSidebar/PhnSidebar";
+import "./Community.css";
 import {
   collection,
   doc,
@@ -25,12 +21,12 @@ import "react-toastify/dist/ReactToastify.css";
 import PostCard from "../../components/Post Card/PostCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDoc } from "../../features/userDocSlice";
-import PostSkeleton from "../../components/Post Skeleton/PostSkeleton";
+import PostSkeleton from "../../components/Skeleton/Post Skeleton/PostSkeleton"
 import CommunityUserProfilePopup from "../../components/Community User Profile Popup/CommunityUserProfilePopup";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
 import CommunityNews from "../../components/Community News/CommunityNews";
-import NewSkeleton from "../../components/Post Skeleton/News Skeleton/NewSkeleton";
+import NewSkeleton from "../../components/Skeleton/News Skeleton/NewSkeleton";
 import { RxCrossCircled } from "react-icons/rx";
 import { FiEdit } from "react-icons/fi";
 import NoFollowingCard from "../../components/No Following Card/NoFollowingCard";
@@ -40,6 +36,11 @@ import { IoLocationSharp } from "react-icons/io5";
 import { BsImages } from "react-icons/bs";
 import { RiFileSearchLine } from "react-icons/ri";
 import SortingNavbarTwoOption from "./Sorting Navbar Two Options/SortingNavbarTwoOptions";  
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import KnowledgeNavbar from "../../components/KnowledgeNavbar/KnowledgeNavbar";
+import addIcon from "../../icons/add.png"
+
 
 const Community = () => {
   const dispatch = useDispatch();
@@ -50,8 +51,9 @@ const Community = () => {
   const [tempImageURL, setTempImageURL] = useState(null);
   const chooseFileRef = useRef(null);
   const [newPostText, setNewPostText] = useState("");
-  const user = useSelector((state) => state.user);
-  const userDoc = useSelector((state) => state.userDoc);
+//   const user = useSelector((state) => state.user);
+const user={user:{email:"eranshbansal@gmail.com"}}
+const userDoc = useSelector((state) => state.userDoc);
   const [newPostdataId, setNewPostDataId] = useState([]);
   const [editPostButtonClick, setEditPostButtonClick] = useState(false);
   const [newEditText, setNewEditText] = useState("");
@@ -69,12 +71,11 @@ const Community = () => {
   const [furtherSortOptionClick, setfurtherSortOptionClick] = useState(false);
 
   const [postIdExist, setPostIdExist] = useState("");
-  const [newScoll, setNewScroll] = useState(0);
   const [newsData, setNewsData] = useState();
   const [singleNews, setSingleNews] = useState(null);
   const [blogArray, setBlogArray] = useState([]);
   const[seeAllNewsIsClicked,setSeeAllNewsIsClicked]=useState(false)
-  
+  console.log("userDoc",userDoc)
 
   //FETCH LATEST NEWS
   const options = {
@@ -105,7 +106,6 @@ const Community = () => {
     setScroll(window.scrollY);
   };
 
-  // console.log("postsData", postsData);
 
   const updateWidth = () => {
     setWidth(window.innerWidth);
@@ -116,14 +116,6 @@ const Community = () => {
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
-  const updateScroll = () => {
-    setNewScroll(window.scrollY);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", updateScroll);
-    return () => window.removeEventListener("scroll", updateScroll);
-  }, []);
 
   //GET SITE URL
   useEffect(() => {
@@ -137,6 +129,8 @@ const Community = () => {
 
   // CHECK FOR USER DOC DATA
   useEffect(() => {
+    if(!user){return}
+    if(JSON.stringify(userDoc)!=="{}"){return}
     async function fetchUserDocFromFirebase() {
       const userDataRef = collection(db, "Users");
       const q = query(userDataRef);
@@ -226,6 +220,7 @@ const Community = () => {
   const displayPosts = postsData.slice(0, pagesVisited + postsPerPage);
   // const pageCount=Math.ceil(postsData.length/notesPerPage)
   const fetchMorePosts = () => {
+    console.log("fetch more")
     setTimeout(() => {
       setPageNumber(pageNumber + 1);
     }, 1000);
@@ -428,21 +423,16 @@ const Community = () => {
 
   return (
     <>
-      {width >= 600 ? (
-        <>
-          <SidebarFinal />
-          {/* <NavBarFinal /> */}
-          {/* <CommunitySidebar /> */}
-          <CommunityNavbar
-            setNavbarPostButtonClick={setNavbarPostButtonClick}
-          />
-        </>
-      ) : (
-        <>
-          <PhnSidebar />
-          <KnowledgeNavbar />
-        </>
-      )}
+        {width >= 600 ? (
+          <>
+            <Sidebar />
+            <Navbar/>
+          </>
+        ) : (
+          <>
+            <KnowledgeNavbar/>
+          </>
+        )}
       <section
         style={{
           position: postsAuthorIsClick || postIdExist !== "" ? "fixed" : "",
@@ -641,7 +631,7 @@ const Community = () => {
                 >
                   <img
                     className="postUploaddSquareContAddImg"
-                    src="./images/add.png"
+                    src={addIcon}
                     alt="addIcon"
                   />
                 </div>
@@ -653,7 +643,7 @@ const Community = () => {
                 >
                   <img
                     className="postUploaddSquareContAddImg"
-                    src="./images/add.png"
+                    src={addIcon}
                     alt="addIcon"
                   />
                 </div>
