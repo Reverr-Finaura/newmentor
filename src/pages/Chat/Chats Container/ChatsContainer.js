@@ -28,7 +28,7 @@ setDummyLoadig(false)
         <h3 className={styles.userName}>Ansh Bansal</h3>
         <p className={styles.userLastText}>Hello its nice to meet you.</p>
     </div>
-    <p className={styles.chatTime}>16:45</p>
+    <p className={styles.chatTime}>16:44</p>
     </div>
 
     </>
