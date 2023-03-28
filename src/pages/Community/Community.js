@@ -430,6 +430,7 @@ const userDoc = useSelector((state) => state.userDoc);
           </>
         ) : (
           <>
+          <Sidebar />
             <KnowledgeNavbar/>
           </>
         )}

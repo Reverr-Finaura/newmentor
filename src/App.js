@@ -5,6 +5,7 @@ import { Dashboard, Login, Profile, Signup, Transaction } from "./pages";
 import Chat from "./pages/Chat/Chat";
 import Community from "./pages/Community/Community";
 import SharedCommunityPost from "./pages/Shared Community Post/SharedCommunityPost"
+import Calender from "./pages/Calender/Calender";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="/community" element={<Community/>}>
       <Route path=":postId" element={<SharedCommunityPost />}></Route>
       </Route>
+      <Route path="/calender" element={<Calender/>}></Route>
     </Routes>
   );
 }

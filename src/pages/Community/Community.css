@@ -902,9 +902,15 @@ cursor: pointer;
     margin-left: 2rem;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   #communityFinalPageOuterSection {
-    margin-left: 12rem;
+    margin: auto;
+    max-width: 95%;
+  }
+  #communityFinalPage {
+    width: 94%;
+    margin-top: 6rem;
+    padding-left: 0;
   }
 }
 @media (max-width: 600px) {
@@ -914,6 +920,7 @@ cursor: pointer;
   }
   #communityFinalPage {
     width: 94%;
+    margin-top: 6rem;
   }
   .editPostContainerrrr {
     width: 100%;
