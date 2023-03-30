@@ -1,24 +1,34 @@
-import React from 'react'
+import React ,{useRef,useEffect}from 'react'
+import { useSelector } from 'react-redux'
 import styles from "./UserChatContainer.module.css"
+const currentcUser={email:"mauricerana@gmail.com",image:"https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"}
 
-
-const dummyData=[
-  {id:1,isUser:true,hasImg:false},{id:2,isUser:false,hasImg:true},{id:3,isUser:false,hasImg:false},{id:4,isUser:true,hasImg:false},
-]
 
 const UserChatContainer = () => {
-  return (
-    <section className={styles.outerCont}>
+  const chatData=useSelector((state)=>state.chat)
+  const ref=useRef()
 
-{dummyData.map((chat)=>{
+useEffect(()=>{
+  ref.current.scrollTo({
+    top:ref.current.scrollHeight,
+    behavior:"smooth"
+  })
+},[chatData])
+
+
+  return (
+    <section ref={ref} className={styles.outerCont}>
+
+{chatData.selectedUserData.map((chat,idx)=>{
   return <>
-  <div style={{alignSelf:chat.isUser?"":"end"}} className={styles.chatCont}>
-    <img style={{order:chat.isUser?"":"2"}} className={styles.userImg} src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="userImg" />
+  <div key={idx} style={{alignSelf:chat.sendBy===currentcUser.email?"":"end"}} className={styles.chatCont}>
+    <img style={{order:chat.sendBy===currentcUser.email?"":"2"}} className={styles.userImg} src={chat.sendBy===currentcUser.email?currentcUser.image:chatData.selectedUser.userImg} alt="userImg" />
 
     <div className={styles.messNTimeCont}>
-      <p>Hello! Have you seen my laptop anywhere in office?</p>
-      {chat.hasImg&&<img className={styles.chatImg} src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="ima" />}
-      <p className={styles.time}>12:56</p>
+      {chat.type?chat.type==="image/png"?<img className={styles.chatImg} src={chat.msg} alt="ima" />: <p>{chat.msg}</p>: <p>{chat.msg}</p>}
+
+      {chat.imgMsg&&<img className={styles.chatImg} src={chat.imgMsg} alt="ima" />}
+      <p className={styles.time}>{chat.createdAt!==""?new Date(chat.createdAt).toTimeString().slice(0,5):"N/A"}</p>
     </div>
       </div>
     

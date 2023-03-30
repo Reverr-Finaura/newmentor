@@ -31,7 +31,7 @@ height: max-content;
 .messNTimeCont{
     display: flex;
     flex-direction: column;
-    width: max-content;
+    max-width: 60%;
     margin-left: .8rem;
     margin-top: .5rem;
     color: rgba(0, 0, 0, 0.85);
@@ -42,6 +42,9 @@ line-height: 16px;
 padding: .7rem 1rem;
 background: #F4F4F7;
 border-radius: 1rem;
+}
+.messNTimeCont p{
+    line-height: 23px;
 }
 .time{
     margin-top: .5rem;

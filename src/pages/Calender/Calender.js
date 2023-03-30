@@ -7,10 +7,10 @@ const Calender = () => {
   return (
     <Layout>
 <section className={styles.outerCont}>
-{/* <InlineWidget url="https://calendly.com/malakushah" /> */}
-<div className={styles.innerCont}>
+<InlineWidget url="https://calendly.com/malakushah" />
+{/* <div className={styles.innerCont}>
     <h1 className={styles.text}>Please Create your Calendly to View</h1>
-</div>
+</div> */}
 
 </section>
     </Layout>

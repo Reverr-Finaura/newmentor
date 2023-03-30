@@ -2,7 +2,7 @@
 .chat_main_Cont{
     box-shadow: 0px 4px 24px 2px #0000001a;
   border-radius: 32px;
-  max-height: 77vh;
+  height: 77vh;
   min-width: 900px;
   border: 2px solid #e6e6e6;
   margin: 2rem 2rem 2rem 6rem;

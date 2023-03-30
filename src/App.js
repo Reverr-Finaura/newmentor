@@ -18,9 +18,9 @@ function App() {
       <Route path="/my-profile" element={<Profile />} />
       <Route path="/messages" element={<Chat/>}/>
       <Route path="/transactions" element={<Transaction />} />
-      <Route path="/community" element={<Community/>}>
+      {/* <Route path="/community" element={<Community/>}>
       <Route path=":postId" element={<SharedCommunityPost />}></Route>
-      </Route>
+      </Route> */}
       <Route path="/calender" element={<Calender/>}></Route>
     </Routes>
   );

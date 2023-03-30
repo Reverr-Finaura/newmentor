@@ -44,6 +44,11 @@
     font-size: 1.3rem;
     line-height: 15px;    
     color: rgba(0, 0, 0, 0.85);
+    text-transform: capitalize;
+}
+.userLastTextCont{
+    display: flex;
+    align-items: center;
 }
 .userLastText{
     font-style: normal;
