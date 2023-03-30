@@ -1,22 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../Layout/Layout";
 import { FiArrowUpRight } from "react-icons/fi";
 import BlogCard from "../../components/Blog Card/BlogCard";
 import "./Dashboard.css";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase";
 import MessagesCont from "../Chat/Messages/MessagesCont";
 import Table from "../../components/Transactiontable dashboard/Table";
 
-
 const Dashboard = () => {
   const [hasMeeting, setHasMeeting] = useState(false);
+  const [blogArray, setBlogArray] = useState([]);
+  const blogData = [];
 
-  const item = {
-    id: 1,
-    image: { imageUrl: "../images/welcomeImg.png", imageName: "blog " },
-    publishedOn: "1st March",
-    heading: "My blog",
-    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla exercitationem iusto soluta quas laudantium quam maxime voluptates incidunt, dolores unde est architecto quae consequuntur distinctio, dolore voluptate ut eligendi provident?",
-  };
+  //FETCH BLOG DATA FROM FIREBASE
+
+  useEffect(() => {
+    async function fetchBlogsFromDb() {
+      const blogRef = collection(db, "Blogs");
+      const q = query(blogRef);
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        blogData.push(doc.data());
+      });
+      setBlogArray(blogData);
+    }
+    fetchBlogsFromDb();
+  }, []);
 
   return (
     <Layout>
@@ -100,10 +117,9 @@ const Dashboard = () => {
             </section>
           </div>
           <div className="dashboard-data-right-cont">
-
-          {/* MESSAGES CONTAINER */}
+            {/* MESSAGES CONTAINER */}
             <section className="dashboard_chat-containerr">
-            <MessagesCont/>
+              <MessagesCont />
             </section>
             <section className="blog-containerr">
               <div className="blog-containerr_Top">
@@ -123,12 +139,9 @@ const Dashboard = () => {
                   <FiArrowUpRight />
                 </button>
               </div>
-              {/* {blogArray.slice(0, 3).map((item, index) => {
+              {blogArray.slice(0, 3).map((item, index) => {
                 return <BlogCard item={item} key={index} />;
-              })} */}
-              <BlogCard item={item} key={item.id} />
-              <BlogCard item={item} key={item.id} />
-              <BlogCard item={item} key={item.id} />
+              })}
             </section>
           </div>
         </section>
