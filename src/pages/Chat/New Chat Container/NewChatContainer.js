@@ -47,13 +47,14 @@ setSending(false)
 
 const handleSendMessage=async()=>{
   setSending(true)
-if(!imgUpload&&newMsg===""){setSending(false);return}
+  if(newMsg===""){setSending(false);return}
+
 if(imgUpload){
   const imgLink=await uploadMedia(imgUpload,"Messages/images")
   saveChatToDatabase(imgLink)
   return
 }
-if(newMsg===""){setSending(false);return}
+
 saveChatToDatabase(null)
 
 }

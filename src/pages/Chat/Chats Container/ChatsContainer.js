@@ -17,7 +17,7 @@ const ChatsContainer = () => {
   const [chatList,setChatList]=useState([])
   const chatData=useSelector((state)=>state.chat)
   const[chatUserData,setChatUserData]=useState([])
-
+console.log("chatList",chatList)
 useEffect(()=>{
 
 const unsub=onSnapshot(doc(db, "Messages",currentcUser.email),async()=>{
