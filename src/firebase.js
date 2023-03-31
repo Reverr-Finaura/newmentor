@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-import { arrayUnion, DocumentReference, Firestore, getFirestore, serverTimestamp, Timestamp } from "firebase/firestore";
+import { arrayUnion, DocumentReference, Firestore, getFirestore, onSnapshot, serverTimestamp, Timestamp } from "firebase/firestore";
 import {
   doc,
   getDocs,
@@ -158,16 +158,24 @@ else if(bucket==="Networks"){
 };
 
 export const ReciveMessage = async (currentcUser, sendTo, setmsg,bucket) => {
- 
+
   try {
     const docRef = doc(db, "Messages", currentcUser.email);
-    const furtherdocRef=doc(docRef,bucket,sendTo.email)
-    const docSnap = await getDoc(furtherdocRef);
-    if(docSnap.data()){  setmsg(docSnap.data().messages);return}
-  // const secondDocRef=doc(docRef,"Networks",sendTo.email)
-  // const secondDocSnap=await getDoc(secondDocRef);
-  // if(secondDocSnap.data()){  setmsg(secondDocSnap.data().messages);return}
-  setmsg([])
+    const furtherdocRef=collection(docRef,bucket)
+  
+
+  onSnapshot(furtherdocRef,(snapshot)=>{
+    snapshot.docs.forEach((doc) => {
+      if(doc.id===sendTo.email){
+        setmsg(doc.data().messages)
+      }
+    })
+    
+  })
+//   const docSnap = await getDoc(furtherdocRef);
+  //   if(docSnap.data()){  setmsg(docSnap.data().messages);return}
+  // setmsg([])
+
   } catch (error) {
     console.log(error)
   }

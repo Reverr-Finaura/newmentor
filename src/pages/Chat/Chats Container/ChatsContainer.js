@@ -18,8 +18,8 @@ const ChatsContainer = () => {
   const chatData=useSelector((state)=>state.chat)
   const[chatUserData,setChatUserData]=useState([])
 console.log("chatList",chatList)
-useEffect(()=>{
 
+useEffect(()=>{
 const unsub=onSnapshot(doc(db, "Messages",currentcUser.email),async()=>{
   await getAllUserHavingChatWith({email:"mauricerana@gmail.com"},setChatList)
   setDummyLoadig(false)
@@ -28,6 +28,20 @@ const unsub=onSnapshot(doc(db, "Messages",currentcUser.email),async()=>{
     unsub()
   }
 },[deploy])
+
+useEffect(()=>{
+  const getAllUserChat=async()=>{
+   
+    await getAllUserHavingChatWith(currentcUser,setChatList)
+  setTimeout(()=>{
+    setDummyLoadig(false)
+  },1000)
+  
+  }
+  
+    getAllUserChat()
+    },[])
+
 
 
 useEffect(()=>{

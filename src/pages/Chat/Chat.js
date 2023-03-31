@@ -18,18 +18,18 @@ const Chat = () => {
   const dispatch=useDispatch()
  
 
-useEffect(()=>{
-  const unsub=onSnapshot(doc(db, "Messages",currentcUser.email),async()=>{
-    ReciveMessage({email:"mauricerana@gmail.com"}, {email:chatData.selectedUser.id}, setRecive,chatData.selectedUser.bucket);
-  })
-    return()=>{
-      unsub()
-    }
-},[deploy])
+// useEffect(()=>{
+//   const unsub=onSnapshot(doc(db, "Messages",currentcUser.email),async()=>{
+//     ReciveMessage({email:"mauricerana@gmail.com"}, {email:chatData.selectedUser.id}, setRecive,chatData.selectedUser.bucket);
+//   })
+//     return()=>{
+//       unsub()
+//     }
+// },[deploy])
 
   useEffect(() => {
 const getChatList=async()=>{
-  ReciveMessage({email:"mauricerana@gmail.com"}, {email:chatData.selectedUser.id}, setRecive,chatData.selectedUser.bucket);
+  ReciveMessage(currentcUser, {email:chatData.selectedUser.id}, setRecive,chatData.selectedUser.bucket);
 }
 if(chatData.selectedUser&&tempId!==chatData.selectedUser.id){getChatList();setTempId(chatData.selectedUser.id)}   
   }, [chatData]);
