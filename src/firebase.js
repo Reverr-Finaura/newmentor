@@ -89,21 +89,35 @@ export const getAllUserHavingChatWith=async(currentcUser,setList)=>{
   const list=[]
   const ref = doc(db, "Messages",currentcUser.email);
   const c=collection(ref,currentcUser && currentcUser.userType == 'Mentor'? 'YourClients': 'YourMentors')
-  const q = query(c);
+
 
   const f=collection(ref,"Networks")
-  const z=query(f)
-  const snap=await getDocs(z);
 
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    list.push({...doc.data(),id:doc.id,bucket:currentcUser && currentcUser.userType == 'Mentor'? 'YourClients': 'YourMentors'})
-  })
-  snap.forEach((doc) => {
-    list.push({...doc.data(),id:doc.id,bucket:"Networks"})
+  const snap=await getDocs(f);
+  onSnapshot(f,(snapshot)=>{
+
+    const dummyList=[]
+    snapshot.docs.forEach((doc) => {
+      dummyList.push({...doc.data(),id:doc.id,bucket:"Networks"})
+    })
+   
+    setList(dummyList)
   })
 
-  setList(list)
+  
+  const querySnapshot = await getDocs(c);
+//SNAPSHOT IMPLEMENT
+onSnapshot(c,(snapshot)=>{
+  
+  const dummyList=[]
+  snapshot.docs.forEach((doc) => {
+    dummyList.push({...doc.data(),id:doc.id,bucket:currentcUser && currentcUser.userType == 'Mentor'? 'YourClients': 'YourMentors'})
+  })
+
+  setList(dummyList)
+})
+
+
 
 }
 
@@ -172,9 +186,7 @@ export const ReciveMessage = async (currentcUser, sendTo, setmsg,bucket) => {
     })
     
   })
-//   const docSnap = await getDoc(furtherdocRef);
-  //   if(docSnap.data()){  setmsg(docSnap.data().messages);return}
-  // setmsg([])
+
 
   } catch (error) {
     console.log(error)

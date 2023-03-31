@@ -1,31 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { db, getAllUserHavingChatWith, ReciveMessage } from '../../firebase'
+import {  ReciveMessage } from '../../firebase'
 import Layout from '../../Layout/Layout'
 import styles from "./Chat.module.css"
 import MessagesCont from './Messages/MessagesCont'
 import SelectedUserCont from './Selected User Container/SelectedUserCont'
 import { updateSelectedUserData } from '../../features/chatSlice'
-import { doc, onSnapshot } from 'firebase/firestore'
+
 
 const currentcUser={email:"mauricerana@gmail.com"}
 const Chat = () => {
 
-  const deploy=useSelector((state)=>state.deploy)
   const[tempId,setTempId]=useState("")
   const chatData=useSelector((state)=>state.chat)
   const [Recive, setRecive] = useState([]);
   const dispatch=useDispatch()
  
-
-// useEffect(()=>{
-//   const unsub=onSnapshot(doc(db, "Messages",currentcUser.email),async()=>{
-//     ReciveMessage({email:"mauricerana@gmail.com"}, {email:chatData.selectedUser.id}, setRecive,chatData.selectedUser.bucket);
-//   })
-//     return()=>{
-//       unsub()
-//     }
-// },[deploy])
 
   useEffect(() => {
 const getChatList=async()=>{
