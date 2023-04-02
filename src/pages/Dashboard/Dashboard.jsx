@@ -14,11 +14,56 @@ import {
 import { db } from "../../firebase";
 import MessagesCont from "../Chat/Messages/MessagesCont";
 import Table from "../../components/Transactiontable dashboard/Table";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserDoc } from "../../features/userDocSlice";
 
 const Dashboard = () => {
   const [hasMeeting, setHasMeeting] = useState(false);
   const [blogArray, setBlogArray] = useState([]);
+  const [userName, setUserName] = useState("");
   const blogData = [];
+  const user = useSelector((state) => state.user);
+  const userDoc = useSelector((state) => state.userDoc);
+  const [userDocId, setUserDocId] = useState([]);
+  const dispatch = useDispatch();
+
+  // console.log("user", user);
+  // console.log("userdoc", userDoc);
+
+  // CHECK FOR USER DOC DATA
+  useEffect(() => {
+    async function fetchUserDocFromFirebase() {
+      const userDataRef = collection(db, "Users");
+      const q = query(userDataRef);
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach((doc) => {
+        setUserDocId((prev) => {
+          return [...prev, doc.id];
+        });
+        if (doc.id === user?.user?.email) {
+          dispatch(setUserDoc(doc.data()));
+        }
+      });
+    }
+    fetchUserDocFromFirebase();
+  }, [user]);
+
+  // CHECK FOR USER NAME
+  useEffect(() => {
+    if (userDoc?.name && userDoc?.name !== "") {
+      setUserName(userDoc.name);
+      return;
+    }
+    if (user?.user?.displayName !== null) {
+      setUserName(user?.user?.displayName);
+      return;
+    }
+
+    var idx = user?.user?.email.indexOf("@");
+    var name = user?.user?.email.slice(0, idx);
+    setUserName(name);
+  }, [userDoc]);
 
   //FETCH BLOG DATA FROM FIREBASE
 
@@ -44,7 +89,7 @@ const Dashboard = () => {
             <h1 className="greeting ">
               Welcome{" "}
               <span>
-                <h4 className="userName">{"User"}</h4>
+                <h4 className="userName">{userName}</h4>
               </span>{" "}
               !
             </h1>
