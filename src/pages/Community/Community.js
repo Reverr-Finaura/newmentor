@@ -52,7 +52,7 @@ const Community = () => {
   const chooseFileRef = useRef(null);
   const [newPostText, setNewPostText] = useState("");
 //   const user = useSelector((state) => state.user);
-const user={user:{email:"eranshbansal@gmail.com"}}
+const user = useSelector((state) => state.user);
 const userDoc = useSelector((state) => state.userDoc);
   const [newPostdataId, setNewPostDataId] = useState([]);
   const [editPostButtonClick, setEditPostButtonClick] = useState(false);
@@ -249,14 +249,18 @@ const userDoc = useSelector((state) => state.userDoc);
 
   const uploadImageToFireBase = async () => {
     if (imageUpload === null && newPostText === "") {
-      toast("Nothing To Post");
+      toast.error("Nothing To Post");
       return;
     }
+    console.log("processing")
     toast("Processing Your Request");
     if (imageUpload === null) {
       createNewPost("");
+      console.log("processing withoutImage")
       return;
-    } else if (imageUpload !== null) {
+    } 
+    if (imageUpload !== null) {
+      console.log("processing with Image")
       const imageReff = ref(
         storage,
         `Community/Posts/${imageUpload.name + new Date().getTime()}`
@@ -268,6 +272,7 @@ const userDoc = useSelector((state) => state.userDoc);
         // GET URL OF IMAGE UPLOADED IN FIREBASE
         await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           createNewPost(downloadURL);
+          return
         });
       } catch (error) {
         toast.error(error.message);
@@ -278,7 +283,6 @@ const userDoc = useSelector((state) => state.userDoc);
   //UPLOAD NEW POST TO FIREBASE
   const createNewPost = async (item) => {
     const userRef = doc(db, "Users", user?.user?.email);
-    toast("Processing Your Request");
     try {
       const timeId = new Date().getTime().toString();
       let newPostId = [...newPostdataId];
@@ -307,7 +311,7 @@ const userDoc = useSelector((state) => state.userDoc);
     try {
       await updateDoc(userDocumentRef, { posts: id });
 
-      toast("Sucessfully Posted");
+      toast.success("Sucessfully Posted");
       setTimeout(() => {
         window.location.reload();
       }, 500);
@@ -329,7 +333,7 @@ const userDoc = useSelector((state) => state.userDoc);
   // EDIT POST CHECK
   const EditPost = async () => {
     toast("Processing Your Request");
-    toast("Processing Your Request");
+
     if (imageUpload === null && newEditText === "") {
       toast("Nothing To Edit");
       return;
@@ -521,12 +525,12 @@ const userDoc = useSelector((state) => state.userDoc);
                             className="addImageInCommunityReactIcon"
                             onClick={chooseFile}
                           />
-                          <button
+                          {/* <button
                             onClick={uploadImageToFireBase}
                             className="uploadPostIconButton"
                           >
-                            Post
-                          </button>
+                            Postingggg
+                          </button> */}
                         </div>
                       </div>
                     </div>
