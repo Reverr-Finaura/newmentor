@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Dashboard, Login, Profile, Signup, Transaction } from "./pages";
 import Chat from "./pages/Chat/Chat";
 import Community from "./pages/Community/Community";
@@ -37,17 +37,26 @@ function App() {
   // console.log(user);
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/my-profile" element={<Profile />} />
-      <Route path="/messages" element={<Chat />} />
-      <Route path="/transactions" element={<Transaction />} />
-      <Route path="/community" element={<Community/>}>
-      <Route path=":postId" element={<SharedCommunityPost />}></Route>
-      </Route>
-      <Route path="/calender" element={<Calender />}></Route>
+      {!user ? (
+        <>
+          <Route path="*" element={<Navigate to={"/"} />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </>
+      ) : (
+        <>
+          <Route path="*" element={<Navigate to={"/dashboard"} />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/my-profile" element={<Profile />} />
+          <Route path="/messages" element={<Chat />} />
+          <Route path="/transactions" element={<Transaction />} />
+          <Route path="/community" element={<Community />}>
+            <Route path=":postId" element={<SharedCommunityPost />}></Route>
+          </Route>
+          <Route path="/calender" element={<Calender />}></Route>
+        </>
+      )}
     </Routes>
   );
 }
