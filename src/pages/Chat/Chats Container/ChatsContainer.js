@@ -14,6 +14,7 @@ import { updateSelectedUser } from '../../../features/chatSlice'
 
 const ChatsContainer = () => {
   const currentcUser = useSelector((state) => state.userDoc);
+  // const currentcUser={email:"mauricerana@gmail.com"}
   const dispatch=useDispatch()
   const[dummyLoading,setDummyLoadig]=useState(false)
   const[dummyLoading2,setDummyLoadig2]=useState(false)
@@ -50,12 +51,12 @@ useEffect(()=>{
   })
   }
 else if(chatUserData.length>0){
-
+console.log("chatUserDataAgain",chatUserData)
   let newChatUserData=[]
   chatUserData.forEach((oldChat)=>{
     chatList.forEach((newList)=>{
      
-      if((oldChat.id===newList.id)){newChatUserData.push ({...oldChat,latestMessage:newList?.messages[newList?.messages?.length-1].msg,sendAT:newList.messages[newList.messages.length-1].createdAt!==""?newList?.messages[newList?.messages?.length-1].createdAt.seconds*1000:"",imgMsg:newList?.messages[newList?.messages?.length-1].image})}
+      if((oldChat.id===newList?.id)){newChatUserData.push ({...oldChat,latestMessage:newList?.messages[newList?.messages?.length-1].msg,sendAT:newList.messages[newList.messages.length-1].createdAt!==""?newList?.messages[newList?.messages?.length-1].createdAt.seconds*1000:"",imgMsg:newList?.messages[newList?.messages?.length-1].image})}
       else {return}
     })
   })
@@ -90,7 +91,7 @@ function customSort(a,b){
       {dummyLoading && <ChatSkeleton cards={3} />}
       {!dummyLoading && chatList.length === 0 && (
         <>
-          <p>No Chats To Display</p>
+          <p className={styles.noChatsMesssage}>No Chats To Display</p>
         </>
       )}
 

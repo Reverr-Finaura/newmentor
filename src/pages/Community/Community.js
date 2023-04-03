@@ -44,7 +44,7 @@ import addIcon from "../../icons/add.png"
 
 const Community = () => {
   const dispatch = useDispatch();
-  const postData = [];
+  // const postData = [];
   const [width, setWidth] = useState(window.innerWidth);
   const [postsData, setPostsData] = useState([]);
   const [imageUpload, setImageUpload] = useState(null);
@@ -75,7 +75,7 @@ const userDoc = useSelector((state) => state.userDoc);
   const [singleNews, setSingleNews] = useState(null);
   const [blogArray, setBlogArray] = useState([]);
   const[seeAllNewsIsClicked,setSeeAllNewsIsClicked]=useState(false)
-  console.log("userDoc",userDoc)
+  // console.log("userDoc",userDoc)
 
   //FETCH LATEST NEWS
   const options = {
@@ -156,6 +156,7 @@ const userDoc = useSelector((state) => state.userDoc);
   //FETCH POSTS DATA FROM FIREBASE
 
   useEffect(() => {
+    let postData=[]
     async function fetchPostsFromDb() {
       const postRef = collection(db, "Posts");
       const q = query(postRef);
@@ -169,7 +170,8 @@ const userDoc = useSelector((state) => state.userDoc);
             return b.createdAt.seconds - a.createdAt.seconds;
           })
         );
-        furtherSortPost();
+        furtherSortPost(postData);
+        return
       }
       if (sortOptionSelected.time === "Popular Now") {
         setPostsData(
@@ -177,7 +179,8 @@ const userDoc = useSelector((state) => state.userDoc);
             return b.likes.length - a.likes.length;
           })
         );
-        furtherSortPost();
+        furtherSortPost(postData);
+        return
       }
       if (sortOptionSelected.time === "Newest") {
         setPostsData(
@@ -185,7 +188,8 @@ const userDoc = useSelector((state) => state.userDoc);
             return b.createdAt.seconds - a.createdAt.seconds;
           })
         );
-        furtherSortPost();
+        furtherSortPost(postData);
+        return
       }
       if (sortOptionSelected.time === "Oldest") {
         setPostsData(
@@ -193,14 +197,16 @@ const userDoc = useSelector((state) => state.userDoc);
             return a.createdAt.seconds - b.createdAt.seconds;
           })
         );
-        furtherSortPost();
+        furtherSortPost(postData);
+        return
       }
     }
-    fetchPostsFromDb();
+    if(sortOptionSelected){ fetchPostsFromDb();}
+   
   }, [sortOptionSelected]);
 
   //FURTHER SORT POST AFTER INITIAL SORT
-  const furtherSortPost = () => {
+  const furtherSortPost = (postData) => {
     if (sortOptionSelected.whose === "Everything") {
       setPostsData(postData);
       return;
@@ -220,7 +226,7 @@ const userDoc = useSelector((state) => state.userDoc);
   const displayPosts = postsData.slice(0, pagesVisited + postsPerPage);
   // const pageCount=Math.ceil(postsData.length/notesPerPage)
   const fetchMorePosts = () => {
-    console.log("fetch more")
+    // console.log("fetch more")
     setTimeout(() => {
       setPageNumber(pageNumber + 1);
     }, 1000);
@@ -252,15 +258,15 @@ const userDoc = useSelector((state) => state.userDoc);
       toast.error("Nothing To Post");
       return;
     }
-    console.log("processing")
+   
     toast("Processing Your Request");
     if (imageUpload === null) {
       createNewPost("");
-      console.log("processing withoutImage")
+    
       return;
     } 
     if (imageUpload !== null) {
-      console.log("processing with Image")
+  
       const imageReff = ref(
         storage,
         `Community/Posts/${imageUpload.name + new Date().getTime()}`
