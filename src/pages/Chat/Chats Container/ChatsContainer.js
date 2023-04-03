@@ -1,3 +1,4 @@
+
 import { doc, getDoc } from 'firebase/firestore'
 import React from 'react'
 import { useEffect } from 'react'
@@ -7,10 +8,12 @@ import ChatSkeleton from '../../../components/Skeleton/Chat Skeleton/ChatSkeleto
 import { db, getAllUserHavingChatWith } from '../../../firebase'
 import styles from "./ChatContainer.module.css"
 import { updateSelectedUser } from '../../../features/chatSlice'
-const currentcUser={email:"mauricerana@gmail.com"}
+
+
+// const currentcUser={email:"jatin@reverrapp.com"}
 
 const ChatsContainer = () => {
-
+  const currentcUser = useSelector((state) => state.userDoc);
   const dispatch=useDispatch()
   const[dummyLoading,setDummyLoadig]=useState(false)
   const[dummyLoading2,setDummyLoadig2]=useState(false)
@@ -27,9 +30,9 @@ useEffect(()=>{
     setDummyLoadig(false)
   
   }
-  
-    getAllUserChat()
-    },[])
+  if(currentcUser){ getAllUserChat()}
+   
+    },[currentcUser])
 
 
 
@@ -62,13 +65,14 @@ else if(chatUserData.length>0){
   
 
   const finaluserChatArr=chatUserData.map((oldChat)=>{
-    if(oldChat.id===dummy[0].id){return{...oldChat,latestMessage:dummy[0]?.latestMessage,sendAT:dummy[0].sendAT,imgMsg:dummy[0]?.imgMsg}}
+    if(oldChat?.id===dummy[0].id){return{...oldChat,latestMessage:dummy[0]?.latestMessage,sendAT:dummy[0].sendAT,imgMsg:dummy[0]?.imgMsg}}
     else{return oldChat}
   })
   setChatUserData(finaluserChatArr)
  
 }
 },[chatList])
+
 
 function customSort(a,b){
   const dateA=new Date(a.sendAT)
@@ -81,31 +85,65 @@ function customSort(a,b){
 }
 
   return (
-   <section className={styles.outerCont}>
-   {dummyLoading2&&<ChatSkeleton cards={3}/>}
-{dummyLoading&&<ChatSkeleton cards={3}/>}
-{(!dummyLoading&&chatList.length===0)&&<><p>No Chats To Display</p></>}
+    <section className={styles.outerCont}>
+      {dummyLoading2 && <ChatSkeleton cards={3} />}
+      {dummyLoading && <ChatSkeleton cards={3} />}
+      {!dummyLoading && chatList.length === 0 && (
+        <>
+          <p>No Chats To Display</p>
+        </>
+      )}
 
-{chatUserData.length>0&&
-  chatUserData.sort((a,b)=>{return(b.sendAT-a.sendAT)}).map((data,idx)=>{
-    return <>
+      {chatUserData.length > 0 &&
+        chatUserData
+          .sort((a, b) => {
+            return b.sendAT - a.sendAT;
+          })
+          .map((data, idx) => {
+            return (
+              <>
+                <div
+                  onClick={() => {
+                    dispatch(updateSelectedUser(data));
+                  }}
+                  style={{
+                    background:
+                      chatData?.selectedUser?.id === data.id ? "#EEEEEE" : "",
+                  }}
+                  key={data.id}
+                  className={styles.chatCont}
+                >
+                  <img
+                    className={styles.chatImg}
+                    src={data.userImg}
+                    alt="chatImg"
+                  />
 
-    <div onClick={()=>{dispatch(updateSelectedUser(data))}} style={{background:chatData?.selectedUser?.id===data.id?"#EEEEEE":""}} key={data.id} className={styles.chatCont}>
-    <img className={styles.chatImg} src={data.userImg} alt="chatImg" />
+                  <div className={styles.userCont}>
+                    <h3 className={styles.userName}>{data.name}</h3>
+                    <div className={styles.userLastTextCont}>
+                      <p className={styles.userLastText}>
+                        {data.latestMessageSenderId === currentcUser.email &&
+                          "Me: "}
+                      </p>{" "}
+                      <p className={styles.userLastText}>
+                        {data.latestMessage !== ""
+                          ? data.latestMessage
+                          : "Image"}
+                      </p>
+                    </div>
+                  </div>
+                  <p className={styles.chatTime}>
+                    {data.sendAT !== ""
+                      ? new Date(data.sendAT).toTimeString().slice(0, 5)
+                      : ""}
+                  </p>
+                </div>
+              </>
+            );
+          })}
+    </section>
+  );
+};
 
-    <div className={styles.userCont}>
-        <h3 className={styles.userName}>{data.name}</h3>
-        <div className={styles.userLastTextCont}><p className={styles.userLastText}>{data.latestMessageSenderId===currentcUser.email&&"Me: "}</p>  <p className={styles.userLastText}>{data.latestMessage!==""?data.latestMessage:"Image"}</p>
-        </div>
-    </div>
-    <p className={styles.chatTime}>{data.sendAT!==""?new Date(data.sendAT).toTimeString().slice(0,5):""}</p>
-    </div>
-
-    </>
-})
-}
-   </section>
-  )
-}
-
-export default ChatsContainer
+export default ChatsContainer;

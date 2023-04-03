@@ -7,11 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SendMessage, uploadMedia } from '../../../firebase';
 import { setRedeploy } from '../../../features/reDeploySlice';
 import {AiFillCloseCircle} from "react-icons/ai"
-const currentcUser={email:"mauricerana@gmail.com"}
+
 
 
 
 const NewChatContainer = () => {
+  const currentcUser = useSelector((state) => state.userDoc);
   const[sending,setSending]=useState(false)
   const deploy=useSelector((state)=>state.deploy)
   const dispatch=useDispatch()

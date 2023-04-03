@@ -8,9 +8,9 @@ import SelectedUserCont from './Selected User Container/SelectedUserCont'
 import { updateSelectedUserData } from '../../features/chatSlice'
 
 
-const currentcUser={email:"mauricerana@gmail.com"}
-const Chat = () => {
 
+const Chat = () => {
+  const currentcUser = useSelector((state) => state.userDoc);
   const[tempId,setTempId]=useState("")
   const chatData=useSelector((state)=>state.chat)
   const [Recive, setRecive] = useState([]);

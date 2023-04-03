@@ -1,8 +1,72 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { login, setUserData } from "../../features/userSlice";
+import { auth, db, getUserFromDatabase } from "../../firebase";
+import { useDispatch } from "react-redux";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const provider = new GoogleAuthProvider();
+
+  const signInWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, provider);
+      const user = res.user;
+
+      const user_n = await getUserFromDatabase(user.email);
+      if (user_n.userType === "Mentor") {
+        dispatch(
+          login({
+            email: auth.currentUser.email,
+            uid: auth.currentUser.uid,
+            displayName: auth.currentUser.displayName,
+            profilePic: auth.currentUser.photoURL,
+          })
+        );
+        navigate("/dashboard");
+      } else {
+        console.log("Not a mentor");
+      }
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
+  const loginEmail = async (e) => {
+    e.preventDefault();
+    try {
+      const user_n = await getUserFromDatabase(email);
+      if (user_n.userType === "Mentor") {
+        await signInWithEmailAndPassword(auth, email, password);
+        navigate("/dashboard");
+      } else {
+        console.log("Not a mentor");
+      }
+      // console.log(res);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
   return (
     <section className={styles.loginOuterCont}>
       <div className={styles.leftCont}>
@@ -29,7 +93,7 @@ const Login = () => {
       </div>
       <div className={styles.rightCont}>
         <h1 className={styles.rightContHeading}>MENTOR's LOGIN</h1>
-        <button className={styles.googleBtn}>
+        <button className={styles.googleBtn} onClick={signInWithGoogle}>
           <span className={styles.gIconCont}>
             <img
               className={styles.gICon}
@@ -40,10 +104,12 @@ const Login = () => {
           Log in with google{" "}
         </button>
         <p className={styles.orText}>-OR-</p>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={loginEmail}>
           <label>Email</label>
           <input
             className={styles.input}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             type="text"
             name="email"
             placeholder="Email Address"
@@ -54,6 +120,8 @@ const Login = () => {
             className={styles.input}
             type="password"
             name="email"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             placeholder="Password"
             required
           />
