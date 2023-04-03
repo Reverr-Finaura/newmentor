@@ -5,6 +5,7 @@ import userReducer from "../features/userSlice";
 import newUserReducer from "../features/newUserSlice";
 import chatSliceReducer from "../features/chatSlice";
 import reDeploySliceReducer from "../features/reDeploySlice";
+import paymentSlice from "../features/paymentSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     userDoc: userDocReducer,
     chat: chatSliceReducer,
     deploy: reDeploySliceReducer,
+    payments: paymentSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

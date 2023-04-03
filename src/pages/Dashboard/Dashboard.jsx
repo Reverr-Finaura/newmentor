@@ -11,11 +11,16 @@ import {
   query,
   setDoc,
 } from "firebase/firestore";
-import { db } from "../../firebase";
+import {
+  db,
+  getPaymentsfromFirebase,
+  getUserFromDatabase,
+} from "../../firebase";
 import MessagesCont from "../Chat/Messages/MessagesCont";
 import Table from "../../components/Transactiontable dashboard/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDoc } from "../../features/userDocSlice";
+import { getPayments } from "../../features/paymentSlice";
 
 const Dashboard = () => {
   const [hasMeeting, setHasMeeting] = useState(false);
@@ -29,6 +34,22 @@ const Dashboard = () => {
 
   // console.log("user", user);
   // console.log("userdoc", userDoc);
+
+  //CHECK FOR PAYMENTS
+
+  useEffect(() => {
+    const fetchPayments = async () => {
+      const res = await getPaymentsfromFirebase(user?.user?.email);
+      const arr = await Promise.all(
+        res.map(async (payment) => {
+          let name = await getUserFromDatabase(payment.user);
+          return { ...payment, name: name?.name };
+        })
+      );
+      dispatch(getPayments(arr));
+    };
+    fetchPayments();
+  }, []);
 
   // CHECK FOR USER DOC DATA
   useEffect(() => {
