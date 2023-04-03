@@ -12,7 +12,7 @@ import { updateSelectedUser } from '../../../features/chatSlice'
 
 // const currentcUser={email:"jatin@reverrapp.com"}
 
-const ChatsContainer = () => {
+const ChatsContainer = ({sorter}) => {
   const currentcUser = useSelector((state) => state.userDoc);
   // const currentcUser={email:"mauricerana@gmail.com"}
   const dispatch=useDispatch()
@@ -85,6 +85,10 @@ function customSort(a,b){
 
 }
 
+useEffect(()=>{
+
+},[sorter])
+
   return (
     <section className={styles.outerCont}>
       {dummyLoading2 && <ChatSkeleton cards={3} />}
@@ -98,7 +102,7 @@ function customSort(a,b){
       {chatUserData.length > 0 &&
         chatUserData
           .sort((a, b) => {
-            return b.sendAT - a.sendAT;
+            return (sorter==="Newest"?(b.sendAT - a.sendAT):(a.sendAT - b.sendAT));
           })
           .map((data, idx) => {
             return (
