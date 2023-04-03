@@ -6,6 +6,7 @@ import {
   DocumentReference,
   Firestore,
   getFirestore,
+  onSnapshot,
   serverTimestamp,
   Timestamp,
 } from "firebase/firestore";
@@ -99,28 +100,36 @@ export const getAllUserHavingChatWith = async (currentcUser, setList) => {
       ? "YourClients"
       : "YourMentors"
   );
-  const q = query(c);
 
   const f = collection(ref, "Networks");
-  const z = query(f);
-  const snap = await getDocs(z);
 
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    list.push({
-      ...doc.data(),
-      id: doc.id,
-      bucket:
-        currentcUser && currentcUser.userType == "Mentor"
-          ? "YourClients"
-          : "YourMentors",
+  const snap = await getDocs(f);
+  onSnapshot(f, (snapshot) => {
+    const dummyList = [];
+    snapshot.docs.forEach((doc) => {
+      dummyList.push({ ...doc.data(), id: doc.id, bucket: "Networks" });
     });
-  });
-  snap.forEach((doc) => {
-    list.push({ ...doc.data(), id: doc.id, bucket: "Networks" });
+
+    setList(dummyList);
   });
 
-  setList(list);
+  const querySnapshot = await getDocs(c);
+  //SNAPSHOT IMPLEMENT
+  onSnapshot(c, (snapshot) => {
+    const dummyList = [];
+    snapshot.docs.forEach((doc) => {
+      dummyList.push({
+        ...doc.data(),
+        id: doc.id,
+        bucket:
+          currentcUser && currentcUser.userType == "Mentor"
+            ? "YourClients"
+            : "YourMentors",
+      });
+    });
+
+    setList(dummyList);
+  });
 };
 
 export const SendMessage = async (
@@ -188,16 +197,15 @@ export const SendMessage = async (
 export const ReciveMessage = async (currentcUser, sendTo, setmsg, bucket) => {
   try {
     const docRef = doc(db, "Messages", currentcUser.email);
-    const furtherdocRef = doc(docRef, bucket, sendTo.email);
-    const docSnap = await getDoc(furtherdocRef);
-    if (docSnap.data()) {
-      setmsg(docSnap.data().messages);
-      return;
-    }
-    // const secondDocRef=doc(docRef,"Networks",sendTo.email)
-    // const secondDocSnap=await getDoc(secondDocRef);
-    // if(secondDocSnap.data()){  setmsg(secondDocSnap.data().messages);return}
-    setmsg([]);
+    const furtherdocRef = collection(docRef, bucket);
+
+    onSnapshot(furtherdocRef, (snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        if (doc.id === sendTo.email) {
+          setmsg(doc.data().messages);
+        }
+      });
+    });
   } catch (error) {
     console.log(error);
   }

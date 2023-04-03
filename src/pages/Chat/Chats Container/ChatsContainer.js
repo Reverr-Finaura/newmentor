@@ -1,76 +1,88 @@
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ChatSkeleton from "../../../components/Skeleton/Chat Skeleton/ChatSkeleton";
-import { db, getAllUserHavingChatWith } from "../../../firebase";
-import styles from "./ChatContainer.module.css";
-import { updateSelectedUser } from "../../../features/chatSlice";
-const currentcUser = { email: "mauricerana@gmail.com" };
+
+import { doc, getDoc } from 'firebase/firestore'
+import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import ChatSkeleton from '../../../components/Skeleton/Chat Skeleton/ChatSkeleton'
+import { db, getAllUserHavingChatWith } from '../../../firebase'
+import styles from "./ChatContainer.module.css"
+import { updateSelectedUser } from '../../../features/chatSlice'
+
+
+// const currentcUser={email:"jatin@reverrapp.com"}
 
 const ChatsContainer = () => {
-  const deploy = useSelector((state) => state.deploy);
-  const dispatch = useDispatch();
-  const [dummyLoading, setDummyLoadig] = useState(true);
-  const [dummyLoading2, setDummyLoadig2] = useState(true);
-  const [chatList, setChatList] = useState([]);
-  const chatData = useSelector((state) => state.chat);
-  const [chatUserData, setChatUserData] = useState([]);
-  // console.log("chatList",chatList)
-  useEffect(() => {
-    const unsub = onSnapshot(
-      doc(db, "Messages", currentcUser.email),
-      async () => {
-        await getAllUserHavingChatWith(
-          { email: "mauricerana@gmail.com" },
-          setChatList
-        );
-        setDummyLoadig(false);
-      }
-    );
-    return () => {
-      unsub();
-    };
-  }, [deploy]);
+  const currentcUser = useSelector((state) => state.userDoc);
+  const dispatch=useDispatch()
+  const[dummyLoading,setDummyLoadig]=useState(false)
+  const[dummyLoading2,setDummyLoadig2]=useState(false)
+  const [chatList,setChatList]=useState([])
+  const chatData=useSelector((state)=>state.chat)
+  const[chatUserData,setChatUserData]=useState([])
+// console.log("chatList",chatList)
 
-  useEffect(() => {
-    setDummyLoadig2(true);
-    setChatUserData([]);
-    if (chatList.length === 0) {
-      setDummyLoadig2(false);
-      return;
-    }
-    chatList.map(async (list, idx) => {
-      const docRef = doc(db, "Users", list.id);
-      const docSnap = await getDoc(docRef);
-      setChatUserData((prev) => {
-        return [
-          ...new Set([
-            ...prev,
-            {
-              id: docSnap.data().email,
-              email: docSnap.data().email,
-              userType: docSnap.data().userType,
-              bucket: list?.bucket,
-              name: docSnap.data().name,
-              userImg: docSnap.data().image,
-              latestMessage: list?.messages[list?.messages?.length - 1].msg,
-              sendAT:
-                list.messages[list.messages.length - 1].createdAt !== ""
-                  ? list?.messages[list?.messages?.length - 1].createdAt
-                      .seconds * 1000
-                  : "",
-              latestMessageSenderId:
-                list?.messages[list?.messages?.length - 1].sendBy,
-              imgMsg: list?.messages[list?.messages?.length - 1].image,
-            },
-          ]),
-        ];
-      });
-      setDummyLoadig2(false);
-    });
-  }, [chatList]);
+
+useEffect(()=>{
+  const getAllUserChat=async()=>{
+    setDummyLoadig(true)
+    await getAllUserHavingChatWith(currentcUser,setChatList)
+    setDummyLoadig(false)
+  
+  }
+  if(currentcUser){ getAllUserChat()}
+   
+    },[currentcUser])
+
+
+
+useEffect(()=>{
+ 
+  if(chatList.length===0){setDummyLoadig2(false);return}
+  if(chatUserData.length===0){
+  chatList.map(async(list,idx)=>{
+    const docRef = doc(db, "Users", list.id);
+  const docSnap = await getDoc(docRef);
+  setChatUserData((prev)=>{
+    return [...new Set([...prev,{id:docSnap.data().email,email:docSnap.data().email,userType:docSnap.data().userType,bucket:list?.bucket,name:docSnap.data().name,userImg:docSnap.data().image,latestMessage:list?.messages[list?.messages?.length-1].msg,sendAT:list.messages[list.messages.length-1].createdAt!==""?list?.messages[list?.messages?.length-1].createdAt.seconds*1000:"",latestMessageSenderId:list?.messages[list?.messages?.length-1].sendBy,imgMsg:list?.messages[list?.messages?.length-1].image}])]
+  })
+  setDummyLoadig2(false)
+  })
+  }
+else if(chatUserData.length>0){
+
+  let newChatUserData=[]
+  chatUserData.forEach((oldChat)=>{
+    chatList.forEach((newList)=>{
+     
+      if((oldChat.id===newList.id)){newChatUserData.push ({...oldChat,latestMessage:newList?.messages[newList?.messages?.length-1].msg,sendAT:newList.messages[newList.messages.length-1].createdAt!==""?newList?.messages[newList?.messages?.length-1].createdAt.seconds*1000:"",imgMsg:newList?.messages[newList?.messages?.length-1].image})}
+      else {return}
+    })
+  })
+ 
+  let dummy=newChatUserData
+  dummy.sort(customSort)
+  
+
+  const finaluserChatArr=chatUserData.map((oldChat)=>{
+    if(oldChat?.id===dummy[0].id){return{...oldChat,latestMessage:dummy[0]?.latestMessage,sendAT:dummy[0].sendAT,imgMsg:dummy[0]?.imgMsg}}
+    else{return oldChat}
+  })
+  setChatUserData(finaluserChatArr)
+ 
+}
+},[chatList])
+
+
+function customSort(a,b){
+  const dateA=new Date(a.sendAT)
+  const dateB=new Date(b.sendAT)
+  
+  if(dateB>dateA){return 1}
+  else if(dateB<dateA){return-1}
+  return 0
+
+}
 
   return (
     <section className={styles.outerCont}>

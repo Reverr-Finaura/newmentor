@@ -1,13 +1,13 @@
 import React ,{useRef,useEffect}from 'react'
 import { useSelector } from 'react-redux'
 import styles from "./UserChatContainer.module.css"
-const currentcUser={email:"mauricerana@gmail.com",image:"https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"}
+
 
 
 const UserChatContainer = () => {
   const chatData=useSelector((state)=>state.chat)
   const ref=useRef()
-
+  const currentcUser = useSelector((state) => state.userDoc);
 useEffect(()=>{
   ref.current.scrollTo({
     top:ref.current.scrollHeight,
