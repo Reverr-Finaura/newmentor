@@ -5,7 +5,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaCalendarAlt } from "react-icons/fa";
 import "./Navbar.css";
 import { signOut } from "firebase/auth";
-import { auth, db } from "../../firebase";
+import { auth, createNetworkInMessagesDoc, db } from "../../firebase";
 import { logout, selectUser } from "../../features/userSlice";
 import { remove } from "../../features/newUserSlice";
 import { removeUserDoc, setUserDoc } from "../../features/userDocSlice";
@@ -147,8 +147,10 @@ const Navbar = () => {
         network: userWhoRequestedNewNetworkArray,
         notification: newNotificationArray,
       });
+      await createNetworkInMessagesDoc(userDoc.email,id);
       toast("Accepted Follow Request");
       dispatch(setUserDoc(updatedUserDoc));
+      window.location.reload()
     } catch (error) {
       console.log(error.message);
     }

@@ -271,11 +271,19 @@ border-image-slice: 1; */
   backdrop-filter: blur(6.10425px);
   z-index: 10;
   overflow-y: auto;
+
 }
 .dashboard_chat-containerr::-webkit-scrollbar {
   display: none;
 }
-
+.dashboard_chat_container_coverr{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border-radius: 20px;  
+  cursor: pointer;
+}
 /* BLOG CONTAINER */
 #dashborad_blog-containerr_outerCont {
   width: 80%;

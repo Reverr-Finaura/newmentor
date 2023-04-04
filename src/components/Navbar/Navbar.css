@@ -110,7 +110,7 @@
   padding: 1rem;
 }
 .notifiction-dropdown-cont {
-  width: 300px;
+  width: 325px;
   height: fit-content;
   /* background-color: var(--bg-sub-card); */
   background-color: #ffffff;
@@ -250,12 +250,12 @@
 .nabar-final-notificationBell {
   font-size: 1.7rem;
   /* margin-right: 2rem; */
-  color: var(--btnNewColorTheme);
+  color: black;
 }
 .nabar-final-notificationBell1 {
   font-size: 1.7rem;
   margin-left: -0.2rem;
-  color: #000;
+  color: red;
 }
 
 .nabar-final-calenderBell {

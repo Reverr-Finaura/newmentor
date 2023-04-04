@@ -132,6 +132,20 @@ export const getAllUserHavingChatWith = async (currentcUser, setList) => {
   });
 };
 
+export const createNetworkInMessagesDoc=async(userId,senderId)=>{
+const userRef=doc(db,"Messages",userId)
+const furtherUserRef=doc(userRef,"Networks",senderId)
+const senderRef=doc(db,"Messages",senderId)
+const furtherSenderRef=doc(senderRef,"Networks",userId)
+
+try {
+  await setDoc(furtherUserRef,{messages: [{createdAt: '',msg: '',sendBy: '',},]})
+  await setDoc(furtherSenderRef,{messages: [{createdAt: '',msg: '',sendBy: '',},]})
+} catch (error) {
+  console.log(error.messages)
+}
+}
+
 export const SendMessage = async (
   currentcUser,
   sendTo,

@@ -21,8 +21,10 @@ import Table from "../../components/Transactiontable dashboard/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDoc } from "../../features/userDocSlice";
 import { getPayments } from "../../features/paymentSlice";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate=useNavigate()
   const [hasMeeting, setHasMeeting] = useState(false);
   const [blogArray, setBlogArray] = useState([]);
   const [userName, setUserName] = useState("");
@@ -185,6 +187,7 @@ const Dashboard = () => {
           <div className="dashboard-data-right-cont">
             {/* MESSAGES CONTAINER */}
             <section className="dashboard_chat-containerr">
+            <div onClick={()=>navigate("/messages")} className="dashboard_chat_container_coverr"></div>
               <MessagesCont />
             </section>
             <section className="blog-containerr">

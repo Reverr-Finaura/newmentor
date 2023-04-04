@@ -21,8 +21,9 @@ const ChatsContainer = ({sorter}) => {
   const [chatList,setChatList]=useState([])
   const chatData=useSelector((state)=>state.chat)
   const[chatUserData,setChatUserData]=useState([])
-// console.log("chatList",chatList)
+  const[dummyAr,setDummyAr]=useState([])
 
+// console.log("chatList",chatList)
 
 useEffect(()=>{
   const getAllUserChat=async()=>{
@@ -40,6 +41,17 @@ useEffect(()=>{
 useEffect(()=>{
  
   if(chatList.length===0){setDummyLoadig2(false);return}
+  if(window.location.pathname==="/dashboard"){
+      chatList.map(async(list,idx)=>{
+        const docRef = doc(db, "Users", list.id);
+      const docSnap = await getDoc(docRef);
+      setDummyAr((p)=>{
+        return [...p,{id:docSnap.data().email,name:docSnap.data().name,userImg:docSnap.data().image,latestMessage:list?.messages[list?.messages?.length-1].msg,sendAT:list.messages[list.messages.length-1].createdAt!==""?list?.messages[list?.messages?.length-1].createdAt.seconds*1000:""}]
+      })
+      setDummyLoadig2(false)
+      })   
+    return
+  }
   if(chatUserData.length===0){
   chatList.map(async(list,idx)=>{
     const docRef = doc(db, "Users", list.id);
@@ -51,22 +63,18 @@ useEffect(()=>{
   })
   }
 else if(chatUserData.length>0){
-console.log("chatUserDataAgain",chatUserData)
   let newChatUserData=[]
   chatUserData.forEach((oldChat)=>{
     chatList.forEach((newList)=>{
-     
-      if((oldChat.id===newList?.id)){newChatUserData.push ({...oldChat,latestMessage:newList?.messages[newList?.messages?.length-1].msg,sendAT:newList.messages[newList.messages.length-1].createdAt!==""?newList?.messages[newList?.messages?.length-1].createdAt.seconds*1000:"",imgMsg:newList?.messages[newList?.messages?.length-1].image})}
+      if((oldChat?.id===newList?.id)){newChatUserData.push ({...oldChat,latestMessage:newList?.messages[newList?.messages?.length-1].msg,sendAT:newList.messages[newList.messages.length-1].createdAt!==""?newList?.messages[newList?.messages?.length-1].createdAt.seconds*1000:"",imgMsg:newList?.messages[newList?.messages?.length-1].image})}
       else {return}
     })
   })
  
   let dummy=newChatUserData
   dummy.sort(customSort)
-  
-
   const finaluserChatArr=chatUserData.map((oldChat)=>{
-    if(oldChat?.id===dummy[0].id){return{...oldChat,latestMessage:dummy[0]?.latestMessage,sendAT:dummy[0].sendAT,imgMsg:dummy[0]?.imgMsg}}
+    if(oldChat?.id===dummy[0]?.id){return{...oldChat,latestMessage:dummy[0]?.latestMessage,sendAT:dummy[0].sendAT,imgMsg:dummy[0]?.imgMsg}}
     else{return oldChat}
   })
   setChatUserData(finaluserChatArr)
@@ -74,6 +82,17 @@ console.log("chatUserDataAgain",chatUserData)
 }
 },[chatList])
 
+
+useEffect(()=>{
+  if(window.location.pathname==="/dashboard"){
+    const tempId=[]
+    dummyAr.map((d)=>{
+if(tempId.includes(d.id)){return}
+setChatUserData((p)=>{return[...p,{...d}]})
+tempId.push(d.id)
+    })
+  }
+},[dummyAr])
 
 function customSort(a,b){
   const dateA=new Date(a.sendAT)
