@@ -7,8 +7,11 @@ import {
   MdOutlineSearch,
 } from "react-icons/md";
 import Table from "../../components/Transactiontable/Table";
+import { useSelector } from "react-redux";
 
 const Transaction = () => {
+  const { payments } = useSelector((state) => state.payments);
+
   return (
     <Layout>
       <div className={styles.transaction_main}>
@@ -25,7 +28,7 @@ const Transaction = () => {
         <div className={styles.transaction_history}>
           <div className={styles.transaction_top}>
             <div className={styles.transaction_headings}>
-              <h3>History (23)</h3>
+              <h3>History ({payments.length})</h3>
               <p>See history of your payment plan invoice.</p>
             </div>
             <button className={styles.download_button}>
@@ -34,7 +37,11 @@ const Transaction = () => {
             </button>
           </div>
           <div className={styles.table_container}>
-            <Table />
+            {payments.length > 0 ? (
+              <Table />
+            ) : (
+              <h3>No Transaction has been made</h3>
+            )}
           </div>
         </div>
       </div>

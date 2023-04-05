@@ -147,10 +147,10 @@ const Navbar = () => {
         network: userWhoRequestedNewNetworkArray,
         notification: newNotificationArray,
       });
-      await createNetworkInMessagesDoc(userDoc.email,id);
+      await createNetworkInMessagesDoc(userDoc.email, id);
       toast("Accepted Follow Request");
       dispatch(setUserDoc(updatedUserDoc));
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.log(error.message);
     }
@@ -228,12 +228,12 @@ const Navbar = () => {
         />
       </div>
       <div className="navbar-icons-cont">
-        <button
+        {/* <button
           className="navbar_final_upgrade_btn"
           onClick={() => navigate("/upgrade")}
         >
           Upgrade
-        </button>
+        </button> */}
 
         <div
           onClick={() => setRequestsbuttonClick((current) => !current)}

@@ -4,7 +4,14 @@ import { FiArrowUpRight } from "react-icons/fi";
 import BlogCard from "../../components/Blog Card/BlogCard";
 import "./Dashboard.css";
 // eslint-disable-next-line
-import {addDoc,collection,doc,getDocs,query,setDoc} from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import {
   db,
   getPaymentsfromFirebase,
@@ -16,11 +23,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserDoc } from "../../features/userDocSlice";
 import { getPayments } from "../../features/paymentSlice";
 import { useNavigate } from "react-router-dom";
-import comImg from "../../icons/community mockup.svg"
+import comImg from "../../icons/community mockup.svg";
 
 const Dashboard = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   // eslint-disable-next-line
+  const { payments } = useSelector((state) => state.payments);
   const [hasMeeting, setHasMeeting] = useState(false);
   const [blogArray, setBlogArray] = useState([]);
   const [userName, setUserName] = useState("");
@@ -47,8 +55,10 @@ const Dashboard = () => {
       );
       dispatch(getPayments(arr));
     };
-    if(user?.user?.email){fetchPayments();}
-  
+    if (user?.user?.email) {
+      fetchPayments();
+    }
+
     // eslint-disable-next-line
   }, [user]);
 
@@ -154,13 +164,20 @@ const Dashboard = () => {
                   <h1>Transaction</h1>
                   <p>Check your payment information according to your needs.</p>
                 </div>
-                <button className="view_more_btn">
+                <button
+                  className="view_more_btn"
+                  onClick={() => navigate("/transactions")}
+                >
                   <span>Load more</span>
                   <FiArrowUpRight />
                 </button>
               </div>
               <div className="transaction_table">
-                <Table />
+                {payments.length > 0 ? (
+                  <Table />
+                ) : (
+                  <h5>No Transaction has been made</h5>
+                )}
               </div>
             </section>
 
@@ -189,7 +206,10 @@ const Dashboard = () => {
           <div className="dashboard-data-right-cont">
             {/* MESSAGES CONTAINER */}
             <section className="dashboard_chat-containerr">
-            <div onClick={()=>navigate("/messages")} className="dashboard_chat_container_coverr"></div>
+              <div
+                onClick={() => navigate("/messages")}
+                className="dashboard_chat_container_coverr"
+              ></div>
               <MessagesCont />
             </section>
             <section className="blog-containerr">
