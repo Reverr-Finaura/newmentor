@@ -3,14 +3,8 @@ import Layout from "../../Layout/Layout";
 import { FiArrowUpRight } from "react-icons/fi";
 import BlogCard from "../../components/Blog Card/BlogCard";
 import "./Dashboard.css";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-} from "firebase/firestore";
+// eslint-disable-next-line
+import {addDoc,collection,doc,getDocs,query,setDoc} from "firebase/firestore";
 import {
   db,
   getPaymentsfromFirebase,
@@ -22,15 +16,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserDoc } from "../../features/userDocSlice";
 import { getPayments } from "../../features/paymentSlice";
 import { useNavigate } from "react-router-dom";
+import comImg from "../../icons/community mockup.svg"
 
 const Dashboard = () => {
   const navigate=useNavigate()
+  // eslint-disable-next-line
   const [hasMeeting, setHasMeeting] = useState(false);
   const [blogArray, setBlogArray] = useState([]);
   const [userName, setUserName] = useState("");
   const blogData = [];
   const user = useSelector((state) => state.user);
   const userDoc = useSelector((state) => state.userDoc);
+  // eslint-disable-next-line
   const [userDocId, setUserDocId] = useState([]);
   const dispatch = useDispatch();
 
@@ -50,8 +47,10 @@ const Dashboard = () => {
       );
       dispatch(getPayments(arr));
     };
-    fetchPayments();
-  }, []);
+    if(user?.user?.email){fetchPayments();}
+  
+    // eslint-disable-next-line
+  }, [user]);
 
   // CHECK FOR USER DOC DATA
   useEffect(() => {
@@ -70,6 +69,7 @@ const Dashboard = () => {
       });
     }
     fetchUserDocFromFirebase();
+    // eslint-disable-next-line
   }, [user]);
 
   // CHECK FOR USER NAME
@@ -86,6 +86,7 @@ const Dashboard = () => {
     var idx = user?.user?.email.indexOf("@");
     var name = user?.user?.email.slice(0, idx);
     setUserName(name);
+    // eslint-disable-next-line
   }, [userDoc]);
 
   //FETCH BLOG DATA FROM FIREBASE
@@ -101,6 +102,7 @@ const Dashboard = () => {
       setBlogArray(blogData);
     }
     fetchBlogsFromDb();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -166,7 +168,7 @@ const Dashboard = () => {
             <section className="join-our-comunity-cont">
               <img
                 className="join-our-comunity-img"
-                src="./images/image 831.png"
+                src={comImg}
                 alt="funding-img"
               />
               <h4 className="join-our-comunity-title">

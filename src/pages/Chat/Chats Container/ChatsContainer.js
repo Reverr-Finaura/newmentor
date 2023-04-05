@@ -80,15 +80,16 @@ else if(chatUserData.length>0){
   setChatUserData(finaluserChatArr)
  
 }
+// eslint-disable-next-line
 },[chatList])
 
 
 useEffect(()=>{
   if(window.location.pathname==="/dashboard"){
     const tempId=[]
-    dummyAr.map((d)=>{
-if(tempId.includes(d.id)){return}
-setChatUserData((p)=>{return[...p,{...d}]})
+    // eslint-disable-next-line
+    dummyAr.map((d)=>{if(tempId.includes(d.id)){return}
+setChatUserData((prev)=>{return[...prev,{...d}]})
 tempId.push(d.id)
     })
   }
@@ -126,15 +127,12 @@ useEffect(()=>{
           .map((data, idx) => {
             return (
               <>
-                <div
-                  onClick={() => {
-                    dispatch(updateSelectedUser(data));
+                <div key={idx} onClick={() => {dispatch(updateSelectedUser(data));
                   }}
                   style={{
                     background:
                       chatData?.selectedUser?.id === data.id ? "#EEEEEE" : "",
                   }}
-                  key={data.id}
                   className={styles.chatCont}
                 >
                   <img
