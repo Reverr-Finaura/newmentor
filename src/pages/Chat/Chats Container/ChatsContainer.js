@@ -113,7 +113,7 @@ useEffect(()=>{
     <section className={styles.outerCont}>
       {dummyLoading2 && <ChatSkeleton cards={3} />}
       {dummyLoading && <ChatSkeleton cards={3} />}
-      {!dummyLoading && chatList.length === 0 && (
+      {!dummyLoading && chatUserData.length === 0 && (
         <>
           <p className={styles.noChatsMesssage}>No Chats To Display</p>
         </>
