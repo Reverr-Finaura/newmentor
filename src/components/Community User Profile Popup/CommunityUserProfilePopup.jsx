@@ -59,7 +59,7 @@ const updateUserSendRequestArray=async()=>{
 //HANDLE FOLLOW REQUEST CLICK
 
 const handleFollowUserClick=async()=>{
-const userRequestArray=postsAuthorInfo.receivedRequests.concat([user?.user?.email])
+const userRequestArray=postsAuthorInfo.receivedRequests?postsAuthorInfo.receivedRequests:postsAuthorInfo.recivedRequests.concat([user?.user?.email])
 
 const userDocumentRef=doc(db,"Users",postsAuthorInfo.email)
 
