@@ -22,6 +22,7 @@ const ChatsContainer = ({sorter}) => {
   const chatData=useSelector((state)=>state.chat)
   const[chatUserData,setChatUserData]=useState([])
   const[dummyAr,setDummyAr]=useState([])
+  const[tempId,setTempId]=useState([])
 
 // console.log("chatList",chatList)
 
@@ -86,11 +87,13 @@ else if(chatUserData.length>0){
 
 useEffect(()=>{
   if(window.location.pathname==="/dashboard"){
-    const tempId=[]
+    const tempraryId=[]
     // eslint-disable-next-line
-    dummyAr.map((d)=>{if(tempId.includes(d.id)){return}
+    dummyAr.map((d)=>{
+      if(tempId.includes(d.id)||tempraryId.includes(d.id)){return}
 setChatUserData((prev)=>{return[...prev,{...d}]})
-tempId.push(d.id)
+setTempId((p)=>{return [...p,d.id]})
+tempraryId.push(d.id)
     })
   }
 },[dummyAr])
